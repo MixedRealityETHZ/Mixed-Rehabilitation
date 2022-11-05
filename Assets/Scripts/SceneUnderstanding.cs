@@ -66,6 +66,7 @@ public class SceneUnderstanding : MonoBehaviour
                 }
                 floor = largestFloor;
             }
+            UpdateCollisionMesh();
         }
     }
 
