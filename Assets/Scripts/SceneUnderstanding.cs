@@ -15,14 +15,26 @@ public class SceneUnderstanding : MonoBehaviour
     public Scene scene;
     public MeshCollider meshCollider;
 
+    SceneQuerySettings querySettings;
+
     void Start()
     {
-        QueryAndUpdateScene();
+        RequestAccess();
+        QueryScene();
     }
     
-    public async void QueryAndUpdateScene()
+    public async void RequestAccess()
     {
-        SceneQuerySettings querySettings;
+        if (!SceneObserver.IsSupported())
+        {
+            Debug.Log("Scene Unerstanding is not supported");
+        }
+
+        // This call should grant the access we need.
+        await SceneObserver.RequestAccessAsync();
+    }
+    public void QueryScene()
+    {
 
         querySettings.EnableSceneObjectQuads = true;
         querySettings.EnableSceneObjectMeshes = true;
@@ -31,7 +43,13 @@ public class SceneUnderstanding : MonoBehaviour
         querySettings.RequestedMeshLevelOfDetail = SceneMeshLevelOfDetail.Fine;
 
         // Initialize new scene
-        Scene scene = await SceneObserver.ComputeAsync(querySettings, 10.0f);
+        scene = SceneObserver.ComputeAsync(querySettings, 10.0f).GetAwaiter().GetResult();
+    }
+
+    public async void UpdateScene()
+    {
+        // Update scene
+        scene = await SceneObserver.ComputeAsync(querySettings, 10.0f, scene);
     }
 
     public void Update()
@@ -68,6 +86,7 @@ public class SceneUnderstanding : MonoBehaviour
             }
             UpdateCollisionMesh();
         }
+        UpdateScene();
     }
 
     public void UpdateCollisionMesh()
