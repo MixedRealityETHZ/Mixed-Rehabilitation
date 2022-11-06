@@ -1,9 +1,22 @@
 using Microsoft.MixedReality.Toolkit;
 using Microsoft.MixedReality.Toolkit.Input;
+using Microsoft.MixedReality.SceneUnderstanding.Samples.Unity;
 using UnityEngine.AI;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+
+using System;
+using System.IO;
+using System.Text;
+using System.Collections;
+using System.Threading.Tasks;
+using System.Runtime.InteropServices;
+//using System.Numerics;
+//Unity
+using UnityEngine.Events;
+
+using Microsoft.MixedReality.OpenXR;
 
 public class PathManager : MonoBehaviour, IMixedRealityPointerHandler
 {
@@ -12,8 +25,14 @@ public class PathManager : MonoBehaviour, IMixedRealityPointerHandler
     public List<GameObject> connectionLines;
     public GameObject navMeshAgentRef;
     private GameObject navMeshAgentInstance;
+    private NavMeshAgent navMeshAgentInstanceComponent;
     private GameObject parentGo;
     private int lastPointInt;
+    //public NavMeshPathStatus m_pathStatus;
+    //public Vector3 m_destination;
+    //public bool m_isStopped;
+    //public NavMeshPath m_path;
+
     private void OnEnable()
     {
         //CoreServices.InputSystem?.RegisterHandler<IMixedRealityPointerHandler>(this);
@@ -30,23 +49,17 @@ public class PathManager : MonoBehaviour, IMixedRealityPointerHandler
         connectionLines = new List<GameObject>();
         //initPath();
         lastPointInt = 0;
+        //m_path = new NavMeshPath();
+        //OnLoadFinished.AddListener(CreateNavMeshAgent);
     }
 
-    private void initPath()
-    {
-        path = new GameObject("SpatialMeshPath");
-        if (parentGo != null)
-        {
-            path.transform.parent = parentGo.transform;
-        }
-        else
-        {
-            path.transform.parent = GameObject.Find("MixedRealitySceneContent").transform;
-        }
-    }
+    
    public void NewPoint()
     {
-        CreateNavMeshAgent();
+        if (navMeshAgentInstance == null)
+        {
+            CreateNavMeshAgent();
+        }
         MoveAgent();
         lastPointInt++;
     }
@@ -60,17 +73,29 @@ public class PathManager : MonoBehaviour, IMixedRealityPointerHandler
 
         if (navMeshAgentInstance == null)
         {
-            Debug.Log("int: " + lastPointInt);
-            Debug.Log("position: " + wayPoints[lastPointInt].transform.position);
-            Debug.Log("rotation: " + wayPoints[lastPointInt].transform.rotation);
-
-            navMeshAgentInstance = Instantiate<GameObject>(navMeshAgentRef, wayPoints[lastPointInt].transform.position, wayPoints[lastPointInt].transform.rotation);
+            navMeshAgentInstance = Instantiate<GameObject>(navMeshAgentRef, wayPoints[0].transform.position, wayPoints[0].transform.rotation);
+            navMeshAgentInstanceComponent = navMeshAgentInstance.GetComponent<NavMeshAgent>();
         }
+        //OnLoadFinished.RemoveListener(CreateNavMeshAgent);
     }
     public void MoveAgent()
     {
-        Debug.Log("Commands move to position" + wayPoints[lastPointInt + 1].transform.position);
-        navMeshAgentInstance.GetComponent<NavMeshAgent>().SetDestination(wayPoints[lastPointInt+1].transform.position);
+        navMeshAgentInstanceComponent.Warp(wayPoints[0].transform.position);
+
+        //Debug.Log("Commands move to position" + wayPoints[lastPointInt + 1].transform.position);
+        Vector3 navDestination = wayPoints[lastPointInt + 1].transform.position;
+        navMeshAgentInstanceComponent.SetDestination(navDestination);
+        navMeshAgentInstanceComponent.isStopped = false;
+
+        /*bool hasFoundPath = navMeshAgentInstanceComponent.CalculatePath(navDestination, m_path);
+        Debug.Log("status: " + m_path.status);
+        Debug.Log("hasFound path: " + hasFoundPath);
+        if (hasFoundPath)
+        {
+            navMeshAgentInstanceComponent.SetPath(m_path);
+            navMeshAgentInstanceComponent.isStopped = false;
+        }*/
+
     }
     public void OnPointerClicked(MixedRealityPointerEventData eventData)
     {
@@ -93,7 +118,18 @@ public class PathManager : MonoBehaviour, IMixedRealityPointerHandler
             }
         }
     }
-
+    private void initPath()
+    {
+        path = new GameObject("SpatialMeshPath");
+        if (parentGo != null)
+        {
+            path.transform.parent = parentGo.transform;
+        }
+        else
+        {
+            path.transform.parent = GameObject.Find("MixedRealitySceneContent").transform;
+        }
+    }
     public static GameObject DrawLine(Vector3 start, Vector3 end, Color color, GameObject parentGo)
     {
         GameObject line = new GameObject("PathConnection");
