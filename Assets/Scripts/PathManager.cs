@@ -24,10 +24,11 @@ public class PathManager : MonoBehaviour, IMixedRealityPointerHandler
     public List<GameObject> wayPoints;
     public List<GameObject> connectionLines;
     public GameObject navMeshAgentRef;
-    private GameObject navMeshAgentInstance;
+    public GameObject navMeshAgentInstance;
     private NavMeshAgent navMeshAgentInstanceComponent;
     private GameObject parentGo;
     private int lastPointInt;
+    public Footprints footprintsScript;
     //public NavMeshPathStatus m_pathStatus;
     //public Vector3 m_destination;
     //public bool m_isStopped;
@@ -75,8 +76,11 @@ public class PathManager : MonoBehaviour, IMixedRealityPointerHandler
         {
             navMeshAgentInstance = Instantiate<GameObject>(navMeshAgentRef, wayPoints[0].transform.position, wayPoints[0].transform.rotation);
             navMeshAgentInstanceComponent = navMeshAgentInstance.GetComponent<NavMeshAgent>();
+            navMeshAgentInstanceComponent.baseOffset = 0;
         }
         //OnLoadFinished.RemoveListener(CreateNavMeshAgent);
+        footprintsScript.player = navMeshAgentInstance;
+        footprintsScript.CreatedPlayer();
     }
     public void MoveAgent()
     {
