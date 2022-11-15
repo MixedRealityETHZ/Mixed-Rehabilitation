@@ -27,7 +27,7 @@ public class PathManager : MonoBehaviour, IMixedRealityPointerHandler
     public GameObject navMeshAgentInstance;
     private NavMeshAgent navMeshAgentInstanceComponent;
     private GameObject parentGo;
-    private int nextPointInt;
+    private int newPointInt;
     public Footprints footprintsScript;
     //public NavMeshPathStatus m_pathStatus;
     //public Vector3 m_destination;
@@ -36,20 +36,20 @@ public class PathManager : MonoBehaviour, IMixedRealityPointerHandler
 
     private void OnEnable()
     {
-        //CoreServices.InputSystem?.RegisterHandler<IMixedRealityPointerHandler>(this);
+        CoreServices.InputSystem?.RegisterHandler<IMixedRealityPointerHandler>(this);
     }
 
     private void OnDisable()
     {
-        //CoreServices.InputSystem?.UnregisterHandler<IMixedRealityPointerHandler>(this);
+        CoreServices.InputSystem?.UnregisterHandler<IMixedRealityPointerHandler>(this);
     }
     // Start is called before the first frame update
     void Start()
     {
-        //wayPoints = new List<GameObject>();
+        wayPoints = new List<GameObject>();
         connectionLines = new List<GameObject>();
-        //initPath();
-        nextPointInt = 0;
+        initPath();
+        newPointInt = 0;
         //m_path = new NavMeshPath();
         //OnLoadFinished.AddListener(CreateNavMeshAgent);
     }
@@ -62,8 +62,7 @@ public class PathManager : MonoBehaviour, IMixedRealityPointerHandler
             CreateNavMeshAgent();
         }
         MoveAgent();
-        nextPointInt++;
-        footprintsScript.NewPoint();
+        newPointInt++;
     }
 
     void CreateNavMeshAgent()
@@ -77,7 +76,6 @@ public class PathManager : MonoBehaviour, IMixedRealityPointerHandler
         {
             navMeshAgentInstance = Instantiate<GameObject>(navMeshAgentRef, Camera.main.transform.position, Camera.main.transform.rotation);
             navMeshAgentInstanceComponent = navMeshAgentInstance.GetComponent<NavMeshAgent>();
-            navMeshAgentInstance.GetComponent<MeshRenderer>().enabled = false;
             navMeshAgentInstanceComponent.baseOffset = 0;
         }
         //OnLoadFinished.RemoveListener(CreateNavMeshAgent);
@@ -89,7 +87,7 @@ public class PathManager : MonoBehaviour, IMixedRealityPointerHandler
         navMeshAgentInstanceComponent.Warp(Camera.main.transform.position);
 
         //Debug.Log("Commands move to position" + wayPoints[lastPointInt + 1].transform.position);
-        Vector3 navDestination = wayPoints[nextPointInt].transform.position;
+        Vector3 navDestination = wayPoints[newPointInt].transform.position;
         navMeshAgentInstanceComponent.SetDestination(navDestination);
         navMeshAgentInstanceComponent.isStopped = false;
 
@@ -123,6 +121,7 @@ public class PathManager : MonoBehaviour, IMixedRealityPointerHandler
                 connectionLines.Add(line);
             }
         }
+        NewPoint();
     }
     private void initPath()
     {

@@ -41,13 +41,7 @@ public class Footprints : MonoBehaviour
         lastPosition = currentPosition;
         isPlayerCreated = true;
     }
-    public void NewPoint()
-    {
-        foreach (GameObject footprint in footprints)
-        {
-            Destroy(footprint);
-        }
-    }
+
     private bool leftFoot = true;
 
     // Update is called once per frame

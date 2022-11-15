@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - NavAgent
   layers:
   - Default
   - TransparentFX
@@ -13,6 +14,10 @@ TagManager:
   - UI
   - 
   - 
+  - IgnoreNavMesh
+  - SUFloors
+  - SUWalls
+  - SUCeilings
   - 
   - 
   - 
@@ -33,10 +38,6 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
-  - 
-  - Spatial Awareness
   m_SortingLayers:
   - name: Default
     uniqueID: 0
