@@ -27,7 +27,7 @@ public class PathManager : MonoBehaviour, IMixedRealityPointerHandler
     public GameObject navMeshAgentInstance;
     private NavMeshAgent navMeshAgentInstanceComponent;
     private GameObject parentGo;
-    private int lastPointInt;
+    private int nextPointInt;
     public Footprints footprintsScript;
     //public NavMeshPathStatus m_pathStatus;
     //public Vector3 m_destination;
@@ -49,7 +49,7 @@ public class PathManager : MonoBehaviour, IMixedRealityPointerHandler
         //wayPoints = new List<GameObject>();
         connectionLines = new List<GameObject>();
         //initPath();
-        lastPointInt = 0;
+        nextPointInt = 0;
         //m_path = new NavMeshPath();
         //OnLoadFinished.AddListener(CreateNavMeshAgent);
     }
@@ -62,7 +62,8 @@ public class PathManager : MonoBehaviour, IMixedRealityPointerHandler
             CreateNavMeshAgent();
         }
         MoveAgent();
-        lastPointInt++;
+        nextPointInt++;
+        footprintsScript.NewPoint();
     }
 
     void CreateNavMeshAgent()
@@ -74,8 +75,9 @@ public class PathManager : MonoBehaviour, IMixedRealityPointerHandler
 
         if (navMeshAgentInstance == null)
         {
-            navMeshAgentInstance = Instantiate<GameObject>(navMeshAgentRef, wayPoints[0].transform.position, wayPoints[0].transform.rotation);
+            navMeshAgentInstance = Instantiate<GameObject>(navMeshAgentRef, Camera.main.transform.position, Camera.main.transform.rotation);
             navMeshAgentInstanceComponent = navMeshAgentInstance.GetComponent<NavMeshAgent>();
+            navMeshAgentInstance.GetComponent<MeshRenderer>().enabled = false;
             navMeshAgentInstanceComponent.baseOffset = 0;
         }
         //OnLoadFinished.RemoveListener(CreateNavMeshAgent);
@@ -84,10 +86,10 @@ public class PathManager : MonoBehaviour, IMixedRealityPointerHandler
     }
     public void MoveAgent()
     {
-        navMeshAgentInstanceComponent.Warp(wayPoints[0].transform.position);
+        navMeshAgentInstanceComponent.Warp(Camera.main.transform.position);
 
         //Debug.Log("Commands move to position" + wayPoints[lastPointInt + 1].transform.position);
-        Vector3 navDestination = wayPoints[lastPointInt + 1].transform.position;
+        Vector3 navDestination = wayPoints[nextPointInt].transform.position;
         navMeshAgentInstanceComponent.SetDestination(navDestination);
         navMeshAgentInstanceComponent.isStopped = false;
 
