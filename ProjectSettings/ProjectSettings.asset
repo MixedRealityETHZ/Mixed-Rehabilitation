@@ -607,7 +607,7 @@ PlayerSettings:
   metroCertificatePassword: 
   metroCertificateSubject: Microsoft Corporation
   metroCertificateIssuer: Microsoft Corporation
-  metroCertificateNotAfter: 004ec9621b11da01
+  metroCertificateNotAfter: 0058feef2918da01
   metroApplicationDescription: Scene Understanding
   wsaImages:
     65636: Assets/SceneUnderstandingApp/Resources/Textures/UWPImages/StoreLogo.scale-100.png
