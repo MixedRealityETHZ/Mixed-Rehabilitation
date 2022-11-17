@@ -1,6 +1,11 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+using UnityEngine.Rendering.VirtualTexturing;
+
 namespace Microsoft.MixedReality.SceneUnderstanding.Samples.Unity
 {
+    using System.Collections.Generic;
+    using Microsoft.MixedReality.Toolkit.Experimental.SceneUnderstanding;
+    using Microsoft.MixedReality.Toolkit.SpatialAwareness;
     using UnityEngine;
     using UnityEngine.AI;
 
@@ -22,6 +27,7 @@ namespace Microsoft.MixedReality.SceneUnderstanding.Samples.Unity
         public GameObject sceneRoot;
         public GameObject navMeshAgentRef;
         private GameObject navMeshAgentInstance;
+        public DemoSceneUnderstandingController demoSceneUnderstandingController;
 
         // This function runs as a callback for the OnLoadFinished event
         // In the SceneUnderstandingManager Component
@@ -48,29 +54,20 @@ namespace Microsoft.MixedReality.SceneUnderstanding.Samples.Unity
         void UpdateNavMeshSettingsForObjsUnderRoot ()
         {
             // Iterate all the Scene Objects
-            foreach(Transform sceneObjContainer in sceneRoot.transform)
+            foreach(var sceneObjTypeDict in demoSceneUnderstandingController.observedSceneObjects)
             {
-                foreach(Transform sceneObj in sceneObjContainer.transform)
+                foreach(var sceneObj in sceneObjTypeDict.Value)
                 {
-                    NavMeshModifier nvm = sceneObj.gameObject.AddComponent<NavMeshModifier>();
-                    nvm.overrideArea = true;
+                    foreach (var quad in sceneObj.Value.Quads)
+                    {
+                        NavMeshModifier nvm = quad.GameObject.AddComponent<NavMeshModifier>();
+                        nvm.overrideArea = true;
 
-                    SceneUnderstandingProperties properties = sceneObj.GetComponent<SceneUnderstandingProperties>();
-                    if(properties != null)
-                    {
                         // Walkable = 0, Not Walkable = 1
                         // This area types are unity predefined, in the unity inspector in the navigation tab go to areas
                         // to see them
-                        nvm.area = properties.suObjectKind == SceneObjectKind.Floor ? (int)AreaType.Walkable : (int)AreaType.NotWalkable;
+                        nvm.area = sceneObjTypeDict.Key == SpatialAwarenessSurfaceTypes.Floor ? (int)AreaType.Walkable : (int)AreaType.NotWalkable;
                     }
-                    else
-                    {
-                        // Walkable = 0, Not Walkable = 1
-                        // This area types are unity predefined, in the unity inspector in the navigation tab go to areas
-                        // to see them
-                        nvm.area = sceneObj.parent.name == "Floor" ? (int)AreaType.Walkable : (int)AreaType.NotWalkable;
-                    }
-                    
                 }
             }
         }
