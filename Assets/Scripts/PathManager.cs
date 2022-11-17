@@ -18,6 +18,8 @@ using UnityEngine.Events;
 
 using Microsoft.MixedReality.OpenXR;
 
+
+
 public class PathManager : MonoBehaviour, IMixedRealityPointerHandler
 {
     public GameObject path;
@@ -29,6 +31,8 @@ public class PathManager : MonoBehaviour, IMixedRealityPointerHandler
     private GameObject parentGo;
     private int nextPointInt;
     public Footprints footprintsScript;
+    private RaycastHit raycastHit;
+    
     //public NavMeshPathStatus m_pathStatus;
     //public Vector3 m_destination;
     //public bool m_isStopped;
@@ -36,25 +40,19 @@ public class PathManager : MonoBehaviour, IMixedRealityPointerHandler
 
     private void OnEnable()
     {
-        CoreServices.InputSystem?.RegisterHandler<IMixedRealityPointerHandler>(this);
+        //CoreServices.InputSystem?.RegisterHandler<IMixedRealityPointerHandler>(this);
     }
 
     private void OnDisable()
     {
-        CoreServices.InputSystem?.UnregisterHandler<IMixedRealityPointerHandler>(this);
+        //CoreServices.InputSystem?.UnregisterHandler<IMixedRealityPointerHandler>(this);
     }
     // Start is called before the first frame update
     void Start()
     {
-        wayPoints = new List<GameObject>();
-        connectionLines = new List<GameObject>();
-        initPath();
-        nextPointInt = 0;
-        //m_path = new NavMeshPath();
-        //OnLoadFinished.AddListener(CreateNavMeshAgent);
     }
 
-
+    /*
     public void NewPoint()
     {
         if (navMeshAgentInstance == null)
@@ -64,10 +62,23 @@ public class PathManager : MonoBehaviour, IMixedRealityPointerHandler
         MoveAgent();
         nextPointInt++;
         footprintsScript.NewPoint();
-    }
+    }*/
 
+    public void NewPointVoiceCommand()
+    {
+        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.TransformDirection(Vector3.forward), out raycastHit, Mathf.Infinity))
+        {
+            if (navMeshAgentInstance == null)
+            {
+                CreateNavMeshAgent();
+            }
+            footprintsScript.NewPoint();
+            MoveAgent(raycastHit.point);
+        }
+    }
     void CreateNavMeshAgent()
     {
+        Debug.Log("Enter in CreateNavMeshAgent");
         if (navMeshAgentRef == null)
         {
             return;
@@ -75,22 +86,18 @@ public class PathManager : MonoBehaviour, IMixedRealityPointerHandler
 
         if (navMeshAgentInstance == null)
         {
-            navMeshAgentInstance = Instantiate<GameObject>(navMeshAgentRef, Camera.main.transform.position, Camera.main.transform.rotation);
+            navMeshAgentInstance = Instantiate<GameObject>(navMeshAgentRef, Camera.main.transform.position, Quaternion.identity);
             navMeshAgentInstanceComponent = navMeshAgentInstance.GetComponent<NavMeshAgent>();
             navMeshAgentInstance.GetComponent<MeshRenderer>().enabled = false;
             navMeshAgentInstanceComponent.baseOffset = 0;
         }
-        //OnLoadFinished.RemoveListener(CreateNavMeshAgent);
         footprintsScript.player = navMeshAgentInstance;
         footprintsScript.CreatedPlayer();
     }
-    public void MoveAgent()
+    public void MoveAgent(Vector3 nextPosition)
     {
-        navMeshAgentInstanceComponent.Warp(Camera.main.transform.position);
-
-        //Debug.Log("Commands move to position" + wayPoints[lastPointInt + 1].transform.position);
-        Vector3 navDestination = wayPoints[nextPointInt].transform.position;
-        navMeshAgentInstanceComponent.SetDestination(navDestination);
+        navMeshAgentInstanceComponent.Warp(Camera.main.transform.position);        
+        navMeshAgentInstanceComponent.SetDestination(nextPosition);
         navMeshAgentInstanceComponent.isStopped = false;
 
         /*bool hasFoundPath = navMeshAgentInstanceComponent.CalculatePath(navDestination, m_path);
@@ -103,6 +110,7 @@ public class PathManager : MonoBehaviour, IMixedRealityPointerHandler
         }*/
 
     }
+    /*
     public void OnPointerClicked(MixedRealityPointerEventData eventData)
     {
         var result = eventData.Pointer.Result;
@@ -117,11 +125,11 @@ public class PathManager : MonoBehaviour, IMixedRealityPointerHandler
             cornerSphere.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
             cornerSphere.GetComponent<Renderer>().material.color = new Color(0, 1, 0, 1);
             wayPoints.Add(cornerSphere);
-            /*if (wayPoints.Count > 1)
-            {
-                GameObject line = DrawLine(wayPoints[^2].transform.position, wayPoints[^1].transform.position, Color.green, path);
-                connectionLines.Add(line);
-            }*/
+            //if (wayPoints.Count > 1)
+            //{
+            //    GameObject line = DrawLine(wayPoints[^2].transform.position, wayPoints[^1].transform.position, Color.green, path);
+            //    connectionLines.Add(line);
+            //}
         }
     }
     private void initPath()
@@ -171,7 +179,10 @@ public class PathManager : MonoBehaviour, IMixedRealityPointerHandler
         }
         return importedPath;
     }
-
+    */
+    public void OnPointerClicked(MixedRealityPointerEventData eventData)
+    {
+    }
     public void OnPointerDown(MixedRealityPointerEventData eventData)
     {
     }
