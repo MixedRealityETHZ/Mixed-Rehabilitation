@@ -185,6 +185,24 @@ public class PathManager : MonoBehaviour, IMixedRealityPointerHandler
     */
     public void OnPointerClicked(MixedRealityPointerEventData eventData)
     {
+        var result = eventData.Pointer.Result;
+        var hitPosition = result.Details.Point;
+        //UnityEngine.Debug.Log("")
+        // Check if hitting spatial mapping layer
+        if (result.CurrentPointerTarget?.layer == 31)
+        {
+            GameObject cornerSphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+            cornerSphere.transform.parent = path.transform;
+            cornerSphere.transform.position = hitPosition;
+            cornerSphere.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+            cornerSphere.GetComponent<Renderer>().material.color = new Color(0, 1, 0, 1);
+            wayPoints.Add(cornerSphere);
+            //if (wayPoints.Count > 1)
+            //{
+            //    GameObject line = DrawLine(wayPoints[^2].transform.position, wayPoints[^1].transform.position, Color.green, path);
+            //    connectionLines.Add(line);
+            //}
+        }
     }
     public void OnPointerDown(MixedRealityPointerEventData eventData)
     {
