@@ -64,6 +64,9 @@ public class PathManager : MonoBehaviour, IMixedRealityPointerHandler
         footprintsScript.NewPoint();
     }*/
 
+    /// <summary>
+    /// Called in SampleInputManagerScript through the inspector
+    /// </summary>
     public void NewPointVoiceCommand()
     {
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.TransformDirection(Vector3.forward), out raycastHit, Mathf.Infinity))
