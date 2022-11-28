@@ -9,8 +9,9 @@ public class Footprints : MonoBehaviour
     public GameObject player;
 
     // The player's last position.
-    private Vector3 lastPosition;
-
+    private Vector3 lastPositionFootprint;
+    private Vector3 lastPositionLine;
+    
     // The player's current position.
     private Vector3 currentPosition;
 
@@ -20,6 +21,7 @@ public class Footprints : MonoBehaviour
     // The list of footprints.
     private List<GameObject> footprints;
     private bool isPlayerCreated = false;
+    public LineRenderer lineRenderer;
 
 
     // Start is called before the first frame update
@@ -32,17 +34,21 @@ public class Footprints : MonoBehaviour
 
     }
 
-    public void CreatedPlayer()
+    public void CreatedPlayer(GameObject _player)
     {
+        player = _player;
         // Get the player's current position.
         currentPosition = player.transform.position;
 
-        // Set the player's last position to the current position.
-        lastPosition = currentPosition;
+        // Set the last position to the current position.
+        lastPositionFootprint = currentPosition;
         isPlayerCreated = true;
     }
     public void NewPoint()
     {
+        //Delete line
+        lineRenderer.positionCount=0;
+        //Delete footprints
         foreach (GameObject footprint in footprints)
         {
             Destroy(footprint);
@@ -53,14 +59,26 @@ public class Footprints : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (player != null && isPlayerCreated)
+        if (player != null && isPlayerCreated && player.transform.position != Camera.main.transform.position)
         {
 
             // Get the player's current position.
             currentPosition = player.transform.position;
 
-            // If the player has moved at least 0.5 units (estimated step size) since the last frame, create a new footprint.
-            if (Vector3.Distance(currentPosition, lastPosition) > 0.5f)
+            // PRINT LINE
+            // If the player has moved more than 0.05 units since the last update add a new point to the linerenderer.
+            if (Vector3.Distance(currentPosition, lastPositionLine) > 0.05f)
+            {
+                // Add a new point to the linerenderer.
+                lineRenderer.positionCount++;
+                lineRenderer.SetPosition(lineRenderer.positionCount - 1, currentPosition);
+
+                // Set the last position to the current position.
+                lastPositionLine = currentPosition;
+            }
+
+            // PRINT FOOTPRINTS If the player has moved at least 0.5 units (estimated step size) since the last frame, create a new footprint.
+            if (Vector3.Distance(currentPosition, lastPositionFootprint) > 0.5f)
             {
                 // Create a new footprint.
                 GameObject footprint = GameObject.CreatePrimitive(PrimitiveType.Cube);
@@ -69,7 +87,7 @@ public class Footprints : MonoBehaviour
                 footprint.transform.position = new Vector3(currentPosition.x, currentPosition.y + 0.02f, currentPosition.z);
 
                 // Alternate between having the footprint be slightly to the left or right of the player's trajectory.
-                Vector3 trajectory = currentPosition - lastPosition;
+                Vector3 trajectory = currentPosition - lastPositionFootprint;
                 if (leftFoot)
                 {
                     footprint.transform.position += new Vector3(trajectory.z, 0, -trajectory.x) * 0.1f;
@@ -100,9 +118,11 @@ public class Footprints : MonoBehaviour
                 }
 
                 // Set the player's last position to the current position.
-                lastPosition = currentPosition;
+                lastPositionFootprint = currentPosition;
             }
-        }
+        }  
+
+        
     }
 
     // Destroy all footprints when the game ends.

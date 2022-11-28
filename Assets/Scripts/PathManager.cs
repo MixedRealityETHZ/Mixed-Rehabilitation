@@ -32,6 +32,7 @@ public class PathManager : MonoBehaviour, IMixedRealityPointerHandler
     private int nextPointInt;
     public Footprints footprintsScript;
     private RaycastHit raycastHit;
+    private bool areCuesOn = true; // non implemented
     
     //public NavMeshPathStatus m_pathStatus;
     //public Vector3 m_destination;
@@ -94,8 +95,8 @@ public class PathManager : MonoBehaviour, IMixedRealityPointerHandler
             navMeshAgentInstance.GetComponent<MeshRenderer>().enabled = false;
             navMeshAgentInstanceComponent.baseOffset = 0;
         }
-        footprintsScript.player = navMeshAgentInstance;
-        footprintsScript.CreatedPlayer();
+        
+        footprintsScript.CreatedPlayer(navMeshAgentInstance);
     }
     public void MoveAgent(Vector3 nextPosition)
     {
