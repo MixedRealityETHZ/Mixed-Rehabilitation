@@ -68,17 +68,30 @@ public class PathManager : MonoBehaviour, IMixedRealityPointerHandler
     /// <summary>
     /// Called in SampleInputManagerScript through the inspector
     /// </summary>
-    public void NewPointVoiceCommand()
+    
+    public void enableCues(){
+        areCuesOn = true;
+    }
+    public void disableCues()
     {
-        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.TransformDirection(Vector3.forward), out raycastHit, Mathf.Infinity))
+        areCuesOn = false;
+    }
+
+        public void NewPointVoiceCommand()
+    {
+        if (areCuesOn)
         {
-            if (navMeshAgentInstance == null)
+            if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.TransformDirection(Vector3.forward), out raycastHit, Mathf.Infinity))
             {
-                CreateNavMeshAgent();
+                if (navMeshAgentInstance == null)
+                {
+                    CreateNavMeshAgent();
+                }
+                footprintsScript.NewPoint();
+                MoveAgent(raycastHit.point);
             }
-            footprintsScript.NewPoint();
-            MoveAgent(raycastHit.point);
         }
+        
     }
     void CreateNavMeshAgent()
     {
