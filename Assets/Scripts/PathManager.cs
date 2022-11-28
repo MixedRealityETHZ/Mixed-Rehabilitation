@@ -71,10 +71,12 @@ public class PathManager : MonoBehaviour, IMixedRealityPointerHandler
     
     public void enableCues(){
         areCuesOn = true;
+        SoundManager.Instance.PlaySoundOn();
     }
     public void disableCues()
     {
         areCuesOn = false;
+        SoundManager.Instance.PlaySoundOff();
     }
 
         public void NewPointVoiceCommand()
