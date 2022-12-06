@@ -17,6 +17,7 @@ using System.Runtime.InteropServices;
 using UnityEngine.Events;
 
 using Microsoft.MixedReality.OpenXR;
+using UnityEditor;
 
 
 
@@ -33,7 +34,14 @@ public class PathManager : MonoBehaviour, IMixedRealityPointerHandler
     public Footprints footprintsScript;
     private RaycastHit raycastHit;
     private bool areCuesOn = true; // non implemented
-    
+    public LineRenderer lineRenderer;
+    private bool isDeviated;
+    private NavMeshPath straightPath;
+    public float maximumDeviationDistance = 1;
+    private float deviationCheckerChronometer = 0.0f;
+    public float deviationCheckerFreqSecs = 1f;
+    public bool navMeshAgentHasPath=false;
+    private bool WaitAndCheckIfPathCreated = false;
     //public NavMeshPathStatus m_pathStatus;
     //public Vector3 m_destination;
     //public bool m_isStopped;
@@ -51,8 +59,35 @@ public class PathManager : MonoBehaviour, IMixedRealityPointerHandler
     // Start is called before the first frame update
     void Start()
     {
-    }
+        straightPath = new NavMeshPath();
+        //set enablecues to true
 
+    }
+    void Update()
+    {
+
+        if (areCuesOn)
+        {
+            deviationCheckerChronometer += Time.deltaTime;
+            if (deviationCheckerChronometer > deviationCheckerFreqSecs)
+            {
+                CalculateDeviation();
+                deviationCheckerChronometer = 0;
+            }
+        }
+        if (navMeshAgentInstanceComponent)
+        navMeshAgentHasPath = navMeshAgentInstanceComponent.hasPath;
+
+        if (WaitAndCheckIfPathCreated)
+        {
+            if (!navMeshAgentInstanceComponent.pathPending)
+            {
+                straightPath = navMeshAgentInstanceComponent.path;
+                DrawStraightPath(straightPath);
+                WaitAndCheckIfPathCreated = false;
+            }
+        }
+    }
     /*
     public void NewPoint()
     {
@@ -68,7 +103,7 @@ public class PathManager : MonoBehaviour, IMixedRealityPointerHandler
     /// <summary>
     /// Called in SampleInputManagerScript through the inspector
     /// </summary>
-    
+
     public void enableCues(){
         areCuesOn = true;
         SoundManager.Instance.PlaySoundOn();
@@ -79,7 +114,7 @@ public class PathManager : MonoBehaviour, IMixedRealityPointerHandler
         SoundManager.Instance.PlaySoundOff();
     }
 
-        public void NewPointVoiceCommand()
+    public void NewPointVoiceCommand()
     {
         if (areCuesOn)
         {
@@ -93,8 +128,8 @@ public class PathManager : MonoBehaviour, IMixedRealityPointerHandler
                 MoveAgent(raycastHit.point);
             }
         }
-        
     }
+
     void CreateNavMeshAgent()
     {
         Debug.Log("Enter in CreateNavMeshAgent");
@@ -115,9 +150,16 @@ public class PathManager : MonoBehaviour, IMixedRealityPointerHandler
     }
     public void MoveAgent(Vector3 nextPosition)
     {
-        navMeshAgentInstanceComponent.Warp(Camera.main.transform.position);        
+        
+        navMeshAgentInstanceComponent.Warp(Camera.main.transform.position);
+        //Calculate straight path
+        //navMeshAgentInstanceComponent.CalculatePath(nextPosition, straightPath);
+        //DrawStraightPath(straightPath);
+        //SetDestination+move
         navMeshAgentInstanceComponent.SetDestination(nextPosition);
         navMeshAgentInstanceComponent.isStopped = false;
+        WaitAndCheckIfPathCreated = true;
+
 
         /*bool hasFoundPath = navMeshAgentInstanceComponent.CalculatePath(navDestination, m_path);
         Debug.Log("status: " + m_path.status);
@@ -126,6 +168,58 @@ public class PathManager : MonoBehaviour, IMixedRealityPointerHandler
         {
             navMeshAgentInstanceComponent.SetPath(m_path);
             navMeshAgentInstanceComponent.isStopped = false;
+        }*/
+
+
+    }
+    public void DrawStraightPath(NavMeshPath path)
+    {
+        Debug.Log(path.corners.Length);
+        lineRenderer.positionCount = path.corners.Length;
+        lineRenderer.SetPositions(path.corners);
+    }
+    public void CalculateDeviation()
+    {
+        
+        Vector3 userXZPosition = Camera.main.transform.position;
+        userXZPosition.y = 0;
+        float distanceToClosestLine =  100.0f;
+        if (straightPath.corners.Length >= 2)
+        {
+            for (int i = 0; i < straightPath.corners.Length - 1; i++)
+            {
+
+                float distanceToLine = HandleUtility.DistancePointLine(userXZPosition, new Vector3(straightPath.corners[i].x, 0, straightPath.corners[i].z), new Vector3 (straightPath.corners[i + 1].x, 0, straightPath.corners[i + 1].z));
+                if (distanceToLine < distanceToClosestLine)
+                {
+                    distanceToClosestLine = distanceToLine;
+                }
+                
+            }
+           
+            if (distanceToClosestLine > maximumDeviationDistance)
+            {
+                Debug.Log("Deviated from Trajectory");
+                NewPointVoiceCommand();
+            }
+        }
+        else
+        {
+        }
+                // calcular distancia minima
+        //si la distancia minima es mayor que un valor - deviated true
+
+        /*if (Vector3.Distance(navMeshAgentInstance.transform.position, point) > 1.5f)
+        {
+            isDeviated = true;
+            return;
+        }
+    }
+    {
+        if (Vector3.Distance(point, navMeshAgentInstance.transform.position) > 1.5f)
+        {
+            isDeviated = true;
+            break;
         }*/
 
     }
@@ -198,7 +292,7 @@ public class PathManager : MonoBehaviour, IMixedRealityPointerHandler
         }
         return importedPath;
     }
-    */
+    
     public void OnPointerClicked(MixedRealityPointerEventData eventData)
     {
         var result = eventData.Pointer.Result;
@@ -219,7 +313,10 @@ public class PathManager : MonoBehaviour, IMixedRealityPointerHandler
             //    connectionLines.Add(line);
             //}
         }
-    }
+    }*/
+    public void OnPointerClicked(MixedRealityPointerEventData eventData)
+    { }
+
     public void OnPointerDown(MixedRealityPointerEventData eventData)
     {
     }

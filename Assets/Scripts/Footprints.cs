@@ -73,7 +73,12 @@ public class Footprints : MonoBehaviour
     {
         if (player != null && isPlayerCreated && player.transform.position != Camera.main.transform.position)
         {
+            //if user deviates from the line renderer 0.5m call newPoint()
             
+            
+            
+            
+
             // Get the player's current position.
             currentPosition = player.transform.position;
             if (isFirstFootprint)
