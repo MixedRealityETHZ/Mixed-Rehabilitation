@@ -9,6 +9,7 @@ public class SoundManager : MonoBehaviour
 
     [SerializeField] private AudioSource m_onSound;
     [SerializeField] private AudioSource m_offSound;
+    [SerializeField] private AudioSource m_soundCue;
 
 
 
@@ -41,6 +42,11 @@ public class SoundManager : MonoBehaviour
     public void PlaySoundOff()
     {
         m_offSound.Play();
+    }
+
+    public void PlaySoundCue()
+    {
+        m_soundCue.Play();
     }
     
 }

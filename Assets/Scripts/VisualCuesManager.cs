@@ -21,7 +21,7 @@ using UnityEditor;
 
 
 
-public class PathManager : MonoBehaviour, IMixedRealityPointerHandler
+public class VisualCuesManager : MonoBehaviour, IMixedRealityPointerHandler
 {
     public GameObject path;
     public List<GameObject> wayPoints;
@@ -33,7 +33,6 @@ public class PathManager : MonoBehaviour, IMixedRealityPointerHandler
     private int nextPointInt;
     public Footprints footprintsScript;
     private RaycastHit raycastHit;
-    private bool areCuesOn = true; // non implemented
     public LineRenderer lineRenderer;
     private bool isDeviated;
     private NavMeshPath straightPath;
@@ -67,7 +66,7 @@ public class PathManager : MonoBehaviour, IMixedRealityPointerHandler
     void Update()
     {
 
-        if (areCuesOn)
+        if (CueManager.Instance.areCuesEnabled)
         {
             deviationCheckerChronometer += Time.deltaTime;
             if (deviationCheckerChronometer > deviationCheckerFreqSecs)
@@ -105,19 +104,11 @@ public class PathManager : MonoBehaviour, IMixedRealityPointerHandler
     /// Called in SampleInputManagerScript through the inspector
     /// </summary>
 
-    public void enableCues(){
-        areCuesOn = true;
-        SoundManager.Instance.PlaySoundOn();
-    }
-    public void disableCues()
-    {
-        areCuesOn = false;
-        SoundManager.Instance.PlaySoundOff();
-    }
+    
 
-    public void NewPointVoiceCommand()
+    public void NewPoint()
     {
-        if (areCuesOn)
+        if (CueManager.Instance.areCuesEnabled)
         {
             if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.TransformDirection(Vector3.forward), out raycastHit, Mathf.Infinity))
             {
@@ -205,7 +196,7 @@ public class PathManager : MonoBehaviour, IMixedRealityPointerHandler
             if (distanceToClosestLine > maximumDeviationDistance)
             {
                 Debug.Log("Deviated from Trajectory");
-                NewPointVoiceCommand();
+                NewPoint();
             }
         }
         else
