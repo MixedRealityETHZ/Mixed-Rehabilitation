@@ -42,6 +42,7 @@ public class PathManager : MonoBehaviour, IMixedRealityPointerHandler
     public float deviationCheckerFreqSecs = 1f;
     public bool navMeshAgentHasPath=false;
     private bool WaitAndCheckIfPathCreated = false;
+    public float distanceToLine = 0.0f;
     //public NavMeshPathStatus m_pathStatus;
     //public Vector3 m_destination;
     //public bool m_isStopped;
@@ -178,6 +179,7 @@ public class PathManager : MonoBehaviour, IMixedRealityPointerHandler
         lineRenderer.positionCount = path.corners.Length;
         lineRenderer.SetPositions(path.corners);
     }
+   
     public void CalculateDeviation()
     {
         
@@ -189,7 +191,10 @@ public class PathManager : MonoBehaviour, IMixedRealityPointerHandler
             for (int i = 0; i < straightPath.corners.Length - 1; i++)
             {
 
-                float distanceToLine = HandleUtility.DistancePointLine(userXZPosition, new Vector3(straightPath.corners[i].x, 0, straightPath.corners[i].z), new Vector3 (straightPath.corners[i + 1].x, 0, straightPath.corners[i + 1].z));
+                //calculate distance between userXZPosition and a line
+                distanceToLine = DistanceCalculator.DistancePointLine(userXZPosition, new Vector3(straightPath.corners[i].x, 0, straightPath.corners[i].z), new Vector3(straightPath.corners[i + 1].x, 0, straightPath.corners[i + 1].z));
+
+                //float distanceToLine = HandleUtility.DistancePointLine(userXZPosition, new Vector3(straightPath.corners[i].x, 0, straightPath.corners[i].z), new Vector3 (straightPath.corners[i + 1].x, 0, straightPath.corners[i + 1].z));
                 if (distanceToLine < distanceToClosestLine)
                 {
                     distanceToClosestLine = distanceToLine;
@@ -327,5 +332,27 @@ public class PathManager : MonoBehaviour, IMixedRealityPointerHandler
 
     public void OnPointerUp(MixedRealityPointerEventData eventData)
     {
+    }
+}
+public static class DistanceCalculator
+{
+    public static Vector3 ProjectPointLine(Vector3 point, Vector3 lineStart, Vector3 lineEnd)
+    {
+        Vector3 relativePoint = point - lineStart;
+        Vector3 lineDirection = lineEnd - lineStart;
+        float length = lineDirection.magnitude;
+        Vector3 normalizedLineDirection = lineDirection;
+        if (length > .000001f)
+            normalizedLineDirection /= length;
+
+        float dot = Vector3.Dot(normalizedLineDirection, relativePoint);
+        dot = Mathf.Clamp(dot, 0.0F, length);
+
+        return lineStart + normalizedLineDirection * dot;
+    }
+
+    public static float DistancePointLine(Vector3 point, Vector3 lineStart, Vector3 lineEnd)
+    {
+        return Vector3.Magnitude(ProjectPointLine(point, lineStart, lineEnd) - point);
     }
 }

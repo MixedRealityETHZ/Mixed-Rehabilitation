@@ -1026,6 +1026,7 @@ MonoBehaviour:
   maximumDeviationDistance: 1
   deviationCheckerFreqSecs: 1
   navMeshAgentHasPath: 0
+  distanceToLine: 0
 --- !u!4 &574798405
 Transform:
   m_ObjectHideFlags: 0
@@ -1827,7 +1828,7 @@ PrefabInstance:
     - target: {fileID: 1654952326856315522, guid: a9b7988b52547e14899219ced698f6b2,
         type: 3}
       propertyPath: QuerySceneFromDevice
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1654952326856315522, guid: a9b7988b52547e14899219ced698f6b2,
         type: 3}
