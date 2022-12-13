@@ -1,12 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Microsoft.MixedReality.SceneUnderstanding.Samples.Unity;
 
 public class CueManager : MonoBehaviour
 {
 
     [SerializeField] private SoundManager soundManager;
     [SerializeField] private VisualCuesManager visualCuesManager;
+
+    [SerializeField] private SceneUnderstandingLabeler sceneUnderstandingLabeler;
+    [SerializeField] private SceneUnderstandingManager sceneUnderstandingManager;
 
     public bool areCuesEnabled = true;
     public bool isFreezed = true;// value not changed
@@ -31,6 +35,7 @@ public class CueManager : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
+   
     // Start is called before the first frame update
     public void NewPointVoiceCommand()
     {
@@ -54,5 +59,15 @@ public class CueManager : MonoBehaviour
     public void UserFinishedFreezing()
     {
         isFreezed = false;
+    }
+    public void DisableDisplayingSceneRoom()
+    {
+        sceneUnderstandingManager.mixedRehabilittion_DisplayMeshes = false;
+        sceneUnderstandingLabeler.DisplayTextLabels = false;
+    }
+    public void EnableDisplayingSceneRoom()
+    {
+        sceneUnderstandingManager.mixedRehabilittion_DisplayMeshes = true;
+        sceneUnderstandingLabeler.DisplayTextLabels = true;
     }
 }

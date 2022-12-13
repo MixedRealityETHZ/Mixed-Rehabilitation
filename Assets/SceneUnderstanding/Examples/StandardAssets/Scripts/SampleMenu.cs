@@ -50,7 +50,8 @@
             UpdateCommands();
 
             // Appear on start
-            StartCoroutine(DelayedShow());
+            //MixedRehabilitation. Originally this was not commented.
+            //StartCoroutine(DelayedShow()); 
         }
 
         IEnumerator DelayedShow()

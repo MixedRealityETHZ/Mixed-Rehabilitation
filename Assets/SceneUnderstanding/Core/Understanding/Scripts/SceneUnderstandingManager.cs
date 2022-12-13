@@ -42,6 +42,7 @@ namespace Microsoft.MixedReality.SceneUnderstanding.Samples.Unity
 
     public class SceneUnderstandingManager : MonoBehaviour
     {
+        public bool mixedRehabilittion_DisplayMeshes;
         #region Public Variables
 
         [Header("Data Loader Mode")]
@@ -223,6 +224,7 @@ namespace Microsoft.MixedReality.SceneUnderstanding.Samples.Unity
 
         private async void Start()
         {
+            mixedRehabilittion_DisplayMeshes = true;
             SceneRoot = SceneRoot == null ? new GameObject("Scene Root") : SceneRoot;
 
             // Considering that device is currently not supported in the editor means that
@@ -1265,9 +1267,12 @@ namespace Microsoft.MixedReality.SceneUnderstanding.Samples.Unity
 
             MeshFilter mf = unityObject.AddComponent<MeshFilter>();
             mf.sharedMesh = mesh;
-
-            MeshRenderer mr = unityObject.AddComponent<MeshRenderer>();
-            mr.sharedMaterial = material;
+            if (mixedRehabilittion_DisplayMeshes)
+            {
+                MeshRenderer mr = unityObject.AddComponent<MeshRenderer>();
+                mr.sharedMaterial = material;
+            }
+            
         }
 
         /// <summary>
