@@ -8,6 +8,8 @@ public class TargetSelector : MonoBehaviour
 {
     // Display to position where the user looks at
     GameObject sphere;
+    MeshRenderer meshRenderer;
+    Renderer renderer;
     // Array of the last 50 positions
     readonly Vector3[] positions = new Vector3[50];
     // Index of the current position
@@ -35,20 +37,31 @@ public class TargetSelector : MonoBehaviour
         {
             visualCuesManager = GameObject.Find("PathManager").GetComponent<VisualCuesManager>();
         }
+        meshRenderer = sphere.GetComponent<MeshRenderer>();
+        renderer = sphere.GetComponent<Renderer>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (CueManager.Instance.automaticDetection)
+        if (CueManager.Instance.targetAutomaticSelection)
         {
+            if (!meshRenderer.enabled)
+            {
+                meshRenderer.enabled = true;
+            }
             UpdateTarget();
+            
+        }
+        else if (meshRenderer.enabled)
+        {
+            meshRenderer.enabled = false;
         }
         
     }
     public void VoiceCommandCalculateTarget()
     {
-        if (CueManager.Instance.areCuesEnabled && !CueManager.Instance.automaticDetection)
+        if (CueManager.Instance.areCuesEnabled && !CueManager.Instance.targetAutomaticSelection)
         {
             RaycastHit raycastHit;
             if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.TransformDirection(Vector3.forward), out raycastHit, Mathf.Infinity))
@@ -93,7 +106,8 @@ public class TargetSelector : MonoBehaviour
             timeSinceSmallVariance += Time.deltaTime;
             if (timeSinceSmallVariance > minTimeToConfirm)
             {
-                sphere.GetComponent<Renderer>().material.color = Color.blue;
+                Debug.Log("blue");
+                renderer.material.color = Color.blue;
                 if (!hasDrawnLine)
                 {
                     visualCuesManager.NewPoint(meanPosition);
@@ -102,7 +116,7 @@ public class TargetSelector : MonoBehaviour
             }
             else
             {
-                sphere.GetComponent<Renderer>().material.color = Color.yellow;
+                renderer.material.color = Color.yellow;
             }
         }
         else
@@ -111,11 +125,10 @@ public class TargetSelector : MonoBehaviour
             hasDrawnLine = false;
             sphere.GetComponent<Renderer>().material.color = Color.red;
         }
-
-        // Check if eye gaze is available
+        /*// Check if eye gaze is available
         if (!CoreServices.InputSystem.EyeGazeProvider.IsEyeTrackingDataValid)
             sphere.GetComponent<Renderer>().material.color = Color.gray;
-
+        */
         // if enabled, set color to red
         /*
         if (CoreServices.InputSystem.EyeGazeProvider.IsEyeTrackingEnabled)

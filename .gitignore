@@ -4,6 +4,7 @@
 [Oo]bj/
 [Bb]uild/
 [Bb]uilds/
+[gG]aitData/
 UWP/
 Assets/AssetStoreTools*
 # Ignore NuGet packages

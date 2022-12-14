@@ -17,7 +17,7 @@ public class CueManager : MonoBehaviour
     public bool isFreezed = true;// value not changed
     public float timeBetweenSteps = 5f;
 
-    public bool automaticDetection = true;
+    public bool targetAutomaticSelection = true;
 
     private static CueManager m_instance;
     public static CueManager Instance
