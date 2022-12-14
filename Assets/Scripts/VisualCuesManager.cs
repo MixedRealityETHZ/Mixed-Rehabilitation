@@ -32,7 +32,6 @@ public class VisualCuesManager : MonoBehaviour, IMixedRealityPointerHandler
     private GameObject parentGo;
     private int nextPointInt;
     public Footprints footprintsScript;
-    private RaycastHit raycastHit;
     public LineRenderer lineRenderer;
     private bool isDeviated;
     private NavMeshPath straightPath;
@@ -42,6 +41,7 @@ public class VisualCuesManager : MonoBehaviour, IMixedRealityPointerHandler
     public bool navMeshAgentHasPath=false;
     private bool WaitAndCheckIfPathCreated = false;
     public float distanceToLine = 0.0f;
+    public Vector3 currentTarget;
     //public NavMeshPathStatus m_pathStatus;
     //public Vector3 m_destination;
     //public bool m_isStopped;
@@ -106,20 +106,26 @@ public class VisualCuesManager : MonoBehaviour, IMixedRealityPointerHandler
 
     
 
-    public void NewPoint()
+    public void NewPoint(Vector3 target)
     {
-        if (CueManager.Instance.areCuesEnabled)
+        if (target != null)
         {
-            if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.TransformDirection(Vector3.forward), out raycastHit, Mathf.Infinity))
+            currentTarget = target;
+            CreateVisualCues(target);
+        }        
+    }
+    void CreateVisualCues(Vector3 target)
+    {
+        if(target != null)
+        {
+            if (navMeshAgentInstance == null)
             {
-                if (navMeshAgentInstance == null)
-                {
-                    CreateNavMeshAgent();
-                }
-                footprintsScript.NewPoint();
-                MoveAgent(raycastHit.point);
+                CreateNavMeshAgent();
             }
+            footprintsScript.NewPoint();
+            MoveAgent(target);
         }
+        
     }
 
     void CreateNavMeshAgent()
@@ -196,7 +202,7 @@ public class VisualCuesManager : MonoBehaviour, IMixedRealityPointerHandler
             if (distanceToClosestLine > maximumDeviationDistance)
             {
                 Debug.Log("Deviated from Trajectory");
-                NewPoint();
+                CreateVisualCues(currentTarget);
             }
         }
         else

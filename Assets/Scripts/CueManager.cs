@@ -11,10 +11,13 @@ public class CueManager : MonoBehaviour
 
     [SerializeField] private SceneUnderstandingLabeler sceneUnderstandingLabeler;
     [SerializeField] private SceneUnderstandingManager sceneUnderstandingManager;
+    
 
     public bool areCuesEnabled = true;
     public bool isFreezed = true;// value not changed
     public float timeBetweenSteps = 5f;
+
+    public bool automaticDetection = true;
 
     private static CueManager m_instance;
     public static CueManager Instance
@@ -37,11 +40,11 @@ public class CueManager : MonoBehaviour
     }
    
     // Start is called before the first frame update
-    public void NewPointVoiceCommand()
+      
+    public void NewPointHeadTraking(Vector3 target)
     {
-        visualCuesManager.NewPoint();
+        visualCuesManager.NewPoint(target);
     }
-
     public void enableCues()
     {
         areCuesEnabled = true;
