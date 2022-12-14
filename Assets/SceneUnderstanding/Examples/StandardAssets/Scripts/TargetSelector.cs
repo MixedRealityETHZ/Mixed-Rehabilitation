@@ -102,6 +102,7 @@ public class TargetSelector : MonoBehaviour
 
         // Update the sphere
         sphere.transform.position = meanPosition;
+        //sphere.transform.position = hitPosition;
     } 
     void UpdateTargetCalculation()
     {
@@ -129,7 +130,8 @@ public class TargetSelector : MonoBehaviour
         variance /= positions.Length;
 
         // Update the sphere
-        sphere.transform.position = meanPosition;
+        //sphere.transform.position = meanPosition;
+        sphere.transform.position = hitPosition;
 
         // Update the color
         if (variance < maxVarianceToConfirm)

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Microsoft.MixedReality.SceneUnderstanding.Samples.Unity;
+using TMPro;
 
 public class CueManager : MonoBehaviour
 {
@@ -12,7 +13,9 @@ public class CueManager : MonoBehaviour
     [SerializeField] private SceneUnderstandingLabeler sceneUnderstandingLabeler;
     [SerializeField] private SceneUnderstandingManager sceneUnderstandingManager;
     [SerializeField] private Footprints footprints;
-
+    [SerializeField] private TextMeshPro textCuesOnOff;
+    [SerializeField] private SpriteRenderer circleCuesOnOff;
+        
     public bool areCuesEnabled = true;
     public bool isFreezed = true;// value not changed
     public float timeBetweenSteps = 5f;
@@ -50,6 +53,9 @@ public class CueManager : MonoBehaviour
         areCuesEnabled = true;
         
         SoundManager.Instance.PlaySoundOn();
+        circleCuesOnOff.color = Color.green;
+        textCuesOnOff.text = "Cues On";
+
     }
     public void disableCues()
     {
@@ -58,6 +64,8 @@ public class CueManager : MonoBehaviour
         footprints.DestroyFootprints();
         footprints.DestroyPath();
         visualCuesManager.DestroyStraightPath();
+        circleCuesOnOff.color = Color.red;
+        textCuesOnOff.text = "Cues Off";
     }
 
     public void UserHasFreezed() {
