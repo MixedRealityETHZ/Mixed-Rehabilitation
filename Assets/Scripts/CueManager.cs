@@ -11,7 +11,7 @@ public class CueManager : MonoBehaviour
 
     [SerializeField] private SceneUnderstandingLabeler sceneUnderstandingLabeler;
     [SerializeField] private SceneUnderstandingManager sceneUnderstandingManager;
-    
+    [SerializeField] private Footprints footprints;
 
     public bool areCuesEnabled = true;
     public bool isFreezed = true;// value not changed
@@ -48,12 +48,16 @@ public class CueManager : MonoBehaviour
     public void enableCues()
     {
         areCuesEnabled = true;
+        
         SoundManager.Instance.PlaySoundOn();
     }
     public void disableCues()
     {
         areCuesEnabled = false;
         SoundManager.Instance.PlaySoundOff();
+        footprints.DestroyFootprints();
+        footprints.DestroyPath();
+        visualCuesManager.DestroyStraightPath();
     }
 
     public void UserHasFreezed() {

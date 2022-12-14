@@ -60,11 +60,7 @@ public class Footprints : MonoBehaviour
         //Delete line
         lineRenderer.positionCount=0;
         //Delete footprints
-        foreach (GameObject footprint in footprints)
-        {
-            Destroy(footprint);
-        }
-        isFirstFootprint = true;
+        DestroyFootprints();
     }
     private bool leftFoot = true;
 
@@ -88,7 +84,7 @@ public class Footprints : MonoBehaviour
             }
             // PRINT LINE
             // If the player has moved more than 0.05 units since the last update add a new point to the linerenderer.
-            if (Vector3.Distance(currentPosition, lastPositionLine) > 0.05f)
+            if (Vector3.Distance(currentPosition, lastPositionLine) > 0.1f && CueManager.Instance.areCuesEnabled)
             {
                 // Add a new point to the linerenderer.
                 lineRenderer.positionCount++;
@@ -99,7 +95,7 @@ public class Footprints : MonoBehaviour
             }
 
             // PRINT FOOTPRINTS If the player has moved at least 0.5 units (estimated step size) since the last frame, create a new footprint.
-            if (Vector3.Distance(currentPosition, lastPositionFootprint) > stepLength)
+            if (Vector3.Distance(currentPosition, lastPositionFootprint) > stepLength && CueManager.Instance.areCuesEnabled)
             {
                 GameObject footprint = null;    
                 // Create a new footprint.
@@ -170,14 +166,25 @@ public class Footprints : MonoBehaviour
 
         
     }
-
-    // Destroy all footprints when the game ends.
-    void OnDestroy()
+    public void DestroyFootprints()
     {
         // Destroy all footprints.
         foreach (GameObject footprint in footprints)
         {
             Destroy(footprint);
         }
+    }
+    public void DestroyPath()
+    {
+        if (lineRenderer != null)
+        {
+            lineRenderer.positionCount = 0;
+        }
+    }
+    // Destroy all footprints when the game ends.
+    void OnDestroy()
+    {
+        DestroyFootprints();
+        DestroyPath();
     }
 }

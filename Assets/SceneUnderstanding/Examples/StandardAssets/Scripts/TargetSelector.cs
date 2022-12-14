@@ -22,6 +22,8 @@ public class TargetSelector : MonoBehaviour
     public float timeSinceSmallVariance = 0;
     // Minimum time to confirm a target
     public float minTimeToConfirm = 2;
+
+    public float maxVarianceToConfirm = 0.2f;
     // Has drawn a line to the target
     bool hasDrawnLine = false;
     
@@ -44,20 +46,31 @@ public class TargetSelector : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (CueManager.Instance.targetAutomaticSelection)
+        if (CueManager.Instance.areCuesEnabled)
         {
             if (!meshRenderer.enabled)
             {
                 meshRenderer.enabled = true;
             }
-            UpdateTarget();
-            
+            if (CueManager.Instance.targetAutomaticSelection)
+            {
+                UpdateTargetCalculation();
+            }
+            else
+            {
+                UpdateTargetPosition();
+            }
         }
-        else if (meshRenderer.enabled)
+        else
         {
-            meshRenderer.enabled = false;
+            if (meshRenderer.enabled)
+            {
+                meshRenderer.enabled = false;
+            }
         }
-        
+
+
+
     }
     public void VoiceCommandCalculateTarget()
     {
@@ -69,9 +82,28 @@ public class TargetSelector : MonoBehaviour
                 visualCuesManager.NewPoint(raycastHit.point);
             }
         }
-
     }
-    void UpdateTarget()
+    void UpdateTargetPosition()
+    {
+        Vector3 hitPosition = CoreServices.InputSystem.EyeGazeProvider.HitPosition;
+
+        // Update the current position
+        positions[index++] = hitPosition;
+        index %= positions.Length;
+
+        // Update the mean position
+        meanPosition = Vector3.zero;
+        for (int i = 0; i < positions.Length; i++)
+        {
+            Debug.Log(positions.Length);
+            meanPosition += positions[i];
+        }
+        meanPosition /= positions.Length;
+
+        // Update the sphere
+        sphere.transform.position = meanPosition;
+    } 
+    void UpdateTargetCalculation()
     {
 
         Vector3 hitPosition = CoreServices.InputSystem.EyeGazeProvider.HitPosition;
@@ -85,7 +117,6 @@ public class TargetSelector : MonoBehaviour
         for (int i = 0; i < positions.Length; i++)
         {
             meanPosition += positions[i];
-
         }
         meanPosition /= positions.Length;
 
@@ -101,12 +132,11 @@ public class TargetSelector : MonoBehaviour
         sphere.transform.position = meanPosition;
 
         // Update the color
-        if (variance < 0.01f)
+        if (variance < maxVarianceToConfirm)
         {
             timeSinceSmallVariance += Time.deltaTime;
             if (timeSinceSmallVariance > minTimeToConfirm)
             {
-                Debug.Log("blue");
                 renderer.material.color = Color.blue;
                 if (!hasDrawnLine)
                 {

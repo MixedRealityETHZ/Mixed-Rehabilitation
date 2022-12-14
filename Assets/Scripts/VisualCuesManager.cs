@@ -172,7 +172,6 @@ public class VisualCuesManager : MonoBehaviour, IMixedRealityPointerHandler
     }
     public void DrawStraightPath(NavMeshPath path)
     {
-        Debug.Log(path.corners.Length);
         lineRenderer.positionCount = path.corners.Length;
         lineRenderer.SetPositions(path.corners);
     }
@@ -224,6 +223,13 @@ public class VisualCuesManager : MonoBehaviour, IMixedRealityPointerHandler
             break;
         }*/
 
+    }
+    public void DestroyStraightPath()
+    {
+        if (lineRenderer != null)
+        {
+            lineRenderer.positionCount = 0;
+        }
     }
     /*
     public void OnPointerClicked(MixedRealityPointerEventData eventData)
