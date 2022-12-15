@@ -22,12 +22,15 @@ public class TargetSelector : MonoBehaviour
     public float timeSinceSmallVariance = 0;
     // Minimum time to confirm a target
     public float minTimeToConfirm = 2;
-
+    // User is looking at a target if the variance is below this value
     public float maxVarianceToConfirm = 0.2f;
+    // Prevent updating target if it's too close to the head
+    public float minDistanceToHead = 2.5f;
     // Has drawn a line to the target
     bool hasDrawnLine = false;
     
     [SerializeField] private VisualCuesManager visualCuesManager;
+    public GameObject targetSymbol;
 
 
     // Start is called before the first frame update
@@ -86,6 +89,11 @@ public class TargetSelector : MonoBehaviour
     void UpdateTargetPosition()
     {
         Vector3 hitPosition = CoreServices.InputSystem.EyeGazeProvider.HitPosition;
+        RaycastHit raycastHit;
+        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.TransformDirection(Vector3.forward), out raycastHit, Mathf.Infinity))
+        {
+            hitPosition = raycastHit.point;
+        }
 
         // Update the current position
         positions[index++] = hitPosition;
@@ -103,11 +111,21 @@ public class TargetSelector : MonoBehaviour
         // Update the sphere
         sphere.transform.position = meanPosition;
         //sphere.transform.position = hitPosition;
+        // Show target symbol 1 meter in front of the user
+        Vector3 targetSymbolPosition = Camera.main.transform.position + (hitPosition - Camera.main.transform.position).normalized;
+        targetSymbol.transform.position = targetSymbolPosition;
+        // Rotate the sphere so it's prependicular to the gaze
+        targetSymbol.transform.rotation = Quaternion.LookRotation((hitPosition - Camera.main.transform.position).normalized, Vector3.up);
     } 
     void UpdateTargetCalculation()
     {
 
         Vector3 hitPosition = CoreServices.InputSystem.EyeGazeProvider.HitPosition;
+        RaycastHit raycastHit;
+        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.TransformDirection(Vector3.forward), out raycastHit, Mathf.Infinity))
+        {
+            hitPosition = raycastHit.point;
+        }
 
         // Update the current position
         positions[index++] = hitPosition;
@@ -132,12 +150,18 @@ public class TargetSelector : MonoBehaviour
         // Update the sphere
         //sphere.transform.position = meanPosition;
         sphere.transform.position = hitPosition;
+        // Show target symbol 2 meter in front of the user
+        Vector3 targetSymbolPosition = Camera.main.transform.position + (hitPosition - Camera.main.transform.position).normalized / 2;
+        targetSymbol.transform.position = targetSymbolPosition;
+        // Rotate the sphere so it's prependicular to the gaze
+        targetSymbol.transform.rotation = Quaternion.LookRotation((hitPosition - Camera.main.transform.position).normalized, Vector3.up);
+
 
         // Update the color
         if (variance < maxVarianceToConfirm)
         {
             timeSinceSmallVariance += Time.deltaTime;
-            if (timeSinceSmallVariance > minTimeToConfirm)
+            if (timeSinceSmallVariance > minTimeToConfirm && (meanPosition - Camera.main.transform.position).magnitude > minDistanceToHead)
             {
                 renderer.material.color = Color.blue;
                 if (!hasDrawnLine)
