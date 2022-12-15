@@ -29,7 +29,8 @@ namespace Microsoft.MixedReality.SceneUnderstanding.Samples.Unity
         {
             UpdateNavMeshSettingsForObjsUnderRoot();
             navMeshSurf.BuildNavMesh();
-            CreateNavMeshAgent();
+            //Mixed Rehabilitation. The following line was uncommented
+            //CreateNavMeshAgent();
         }
 
         void CreateNavMeshAgent()

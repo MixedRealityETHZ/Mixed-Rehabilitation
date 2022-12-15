@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 0}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -969,47 +969,47 @@ PrefabInstance:
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
       propertyPath: inputActions.Array.size
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
       propertyPath: inputActions.Array.data[0].key
-      value: 103
-      objectReference: {fileID: 0}
-    - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
-        type: 3}
-      propertyPath: inputActions.Array.data[1].key
       value: 116
       objectReference: {fileID: 0}
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
-      propertyPath: inputActions.Array.data[2].key
+      propertyPath: inputActions.Array.data[1].key
       value: 110
       objectReference: {fileID: 0}
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
-      propertyPath: inputActions.Array.data[3].key
+      propertyPath: inputActions.Array.data[2].key
       value: 102
       objectReference: {fileID: 0}
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
-      propertyPath: inputActions.Array.data[4].key
+      propertyPath: inputActions.Array.data[3].key
       value: 275
       objectReference: {fileID: 0}
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
-      propertyPath: inputActions.Array.data[5].key
+      propertyPath: inputActions.Array.data[4].key
       value: 274
       objectReference: {fileID: 0}
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
-      propertyPath: inputActions.Array.data[6].key
+      propertyPath: inputActions.Array.data[5].key
       value: 127
       objectReference: {fileID: 0}
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
-      propertyPath: inputActions.Array.data[7].key
+      propertyPath: inputActions.Array.data[6].key
       value: 115
+      objectReference: {fileID: 0}
+    - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
+        type: 3}
+      propertyPath: inputActions.Array.data[7].key
+      value: 105
       objectReference: {fileID: 0}
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
@@ -1019,42 +1019,42 @@ PrefabInstance:
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
       propertyPath: inputActions.Array.data[0].phrase
-      value: Go There
-      objectReference: {fileID: 0}
-    - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
-        type: 3}
-      propertyPath: inputActions.Array.data[1].phrase
       value: Target
       objectReference: {fileID: 0}
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
-      propertyPath: inputActions.Array.data[2].phrase
+      propertyPath: inputActions.Array.data[1].phrase
       value: On
       objectReference: {fileID: 0}
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
-      propertyPath: inputActions.Array.data[3].phrase
+      propertyPath: inputActions.Array.data[2].phrase
       value: Off
       objectReference: {fileID: 0}
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
-      propertyPath: inputActions.Array.data[4].phrase
+      propertyPath: inputActions.Array.data[3].phrase
       value: Record
       objectReference: {fileID: 0}
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
-      propertyPath: inputActions.Array.data[5].phrase
+      propertyPath: inputActions.Array.data[4].phrase
       value: Save
       objectReference: {fileID: 0}
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
-      propertyPath: inputActions.Array.data[6].phrase
+      propertyPath: inputActions.Array.data[5].phrase
       value: Quit
       objectReference: {fileID: 0}
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
-      propertyPath: inputActions.Array.data[7].phrase
+      propertyPath: inputActions.Array.data[6].phrase
       value: Show
+      objectReference: {fileID: 0}
+    - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
+        type: 3}
+      propertyPath: inputActions.Array.data[7].phrase
+      value: Hide
       objectReference: {fileID: 0}
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
@@ -1064,37 +1064,37 @@ PrefabInstance:
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
       propertyPath: inputActions.Array.data[0].description
-      value: Has the agent navigate to the gaze location
-      objectReference: {fileID: 0}
-    - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
-        type: 3}
-      propertyPath: inputActions.Array.data[1].description
       value: Set new locomotion target
       objectReference: {fileID: 0}
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
-      propertyPath: inputActions.Array.data[2].description
+      propertyPath: inputActions.Array.data[1].description
       value: Enable cues
       objectReference: {fileID: 0}
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
-      propertyPath: inputActions.Array.data[3].description
+      propertyPath: inputActions.Array.data[2].description
       value: Disable cues
       objectReference: {fileID: 0}
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
-      propertyPath: inputActions.Array.data[4].description
+      propertyPath: inputActions.Array.data[3].description
       value: Record gait data
       objectReference: {fileID: 0}
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
-      propertyPath: inputActions.Array.data[5].description
+      propertyPath: inputActions.Array.data[4].description
       value: Save gait data
       objectReference: {fileID: 0}
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
-      propertyPath: inputActions.Array.data[6].description
+      propertyPath: inputActions.Array.data[5].description
       value: Quit application
+      objectReference: {fileID: 0}
+    - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
+        type: 3}
+      propertyPath: inputActions.Array.data[6].description
+      value: Show the scene understanding scene
       objectReference: {fileID: 0}
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
@@ -1205,12 +1205,12 @@ PrefabInstance:
         type: 3}
       propertyPath: inputActions.Array.data[0].handler.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 657587273}
+      objectReference: {fileID: 1359092233}
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
       propertyPath: inputActions.Array.data[1].handler.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1359092233}
+      objectReference: {fileID: 778286237}
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
       propertyPath: inputActions.Array.data[2].handler.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -1225,7 +1225,7 @@ PrefabInstance:
         type: 3}
       propertyPath: inputActions.Array.data[3].handler.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 778286237}
+      objectReference: {fileID: 574798406}
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
       propertyPath: inputActions.Array.data[4].handler.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -1240,7 +1240,7 @@ PrefabInstance:
         type: 3}
       propertyPath: inputActions.Array.data[6].handler.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 574798406}
+      objectReference: {fileID: 778286237}
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
       propertyPath: inputActions.Array.data[7].handler.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -1304,17 +1304,17 @@ PrefabInstance:
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
       propertyPath: inputActions.Array.data[0].handler.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: MoveAgent
-      objectReference: {fileID: 0}
-    - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
-        type: 3}
-      propertyPath: inputActions.Array.data[1].handler.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: VoiceCommandCalculateTarget
       objectReference: {fileID: 0}
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
-      propertyPath: inputActions.Array.data[2].handler.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      propertyPath: inputActions.Array.data[1].handler.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: enableCues
+      objectReference: {fileID: 0}
+    - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
+        type: 3}
+      propertyPath: inputActions.Array.data[2].handler.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: disableCues
       objectReference: {fileID: 0}
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
@@ -1324,27 +1324,27 @@ PrefabInstance:
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
       propertyPath: inputActions.Array.data[3].handler.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: disableCues
-      objectReference: {fileID: 0}
-    - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
-        type: 3}
-      propertyPath: inputActions.Array.data[4].handler.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: StartRecording
       objectReference: {fileID: 0}
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
-      propertyPath: inputActions.Array.data[5].handler.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      propertyPath: inputActions.Array.data[4].handler.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: SaveNCreateNewFile
       objectReference: {fileID: 0}
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
-      propertyPath: inputActions.Array.data[6].handler.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      propertyPath: inputActions.Array.data[5].handler.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: Quit
       objectReference: {fileID: 0}
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
-      propertyPath: inputActions.Array.data[7].handler.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      propertyPath: inputActions.Array.data[6].handler.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: EnableDisplayingSceneRoom
+      objectReference: {fileID: 0}
+    - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
+        type: 3}
+      propertyPath: inputActions.Array.data[7].handler.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: DisableDisplayingSceneRoom
       objectReference: {fileID: 0}
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
@@ -1353,8 +1353,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
-      propertyPath: inputActions.Array.data[1].handler.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      propertyPath: inputActions.Array.data[0].handler.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: TargetSelector, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
+        type: 3}
+      propertyPath: inputActions.Array.data[1].handler.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: CueManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
@@ -1369,7 +1374,7 @@ PrefabInstance:
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
       propertyPath: inputActions.Array.data[3].handler.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: CueManager, Assembly-CSharp
+      value: PoseTracking, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
@@ -1384,7 +1389,7 @@ PrefabInstance:
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
       propertyPath: inputActions.Array.data[6].handler.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: PoseTracking, Assembly-CSharp
+      value: CueManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
@@ -2872,7 +2877,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cc1ee9695b1f824c8d8750a29bd1813, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sphere: {fileID: 0}
   timeSinceSmallVariance: 0
   minTimeToConfirm: 1
   maxVarianceToConfirm: 0.1
