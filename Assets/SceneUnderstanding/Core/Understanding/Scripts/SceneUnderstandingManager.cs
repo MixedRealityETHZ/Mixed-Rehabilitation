@@ -13,6 +13,8 @@ namespace Microsoft.MixedReality.SceneUnderstanding.Samples.Unity
     //Unity
     using UnityEngine;
     using UnityEngine.Events;
+    using Microsoft.MixedReality.OpenXR;
+    using Microsoft.MixedReality.Toolkit;
 
 
 #if WINDOWS_UWP
@@ -1359,10 +1361,18 @@ namespace Microsoft.MixedReality.SceneUnderstanding.Samples.Unity
         {
             System.Numerics.Matrix4x4? sceneToUnityTransform = System.Numerics.Matrix4x4.Identity;
 
+            SpatialGraphNode node = SpatialGraphNode.FromStaticNodeId(scene.OriginSpatialGraphNodeId);
+            if (RunOnDevice && node.TryLocate(FrameTime.OnUpdate, out Pose pose))
+            {
+                var result = Matrix4x4.TRS(pose.position, pose.rotation, Vector3.one).ToSystemNumerics();
+                return ConvertRightHandedMatrix4x4ToLeftHanded(result);
+            }
+
             if (RunOnDevice)
             {
                 Windows.Perception.Spatial.SpatialCoordinateSystem sceneCoordinateSystem = Microsoft.Windows.Perception.Spatial.Preview.SpatialGraphInteropPreview.CreateCoordinateSystemForNode(scene.OriginSpatialGraphNodeId);
-                Windows.Perception.Spatial.SpatialCoordinateSystem unityCoordinateSystem = Microsoft.Windows.Perception.Spatial.SpatialCoordinateSystem.FromNativePtr(UnityEngine.XR.WindowsMR.WindowsMREnvironment.OriginSpatialCoordinateSystem);
+                // Windows.Perception.Spatial.SpatialCoordinateSystem unityCoordinateSystem = Microsoft.Windows.Perception.Spatial.SpatialCoordinateSystem.FromNativePtr(UnityEngine.XR.WindowsMR.WindowsMREnvironment.OriginSpatialCoordinateSystem);
+                Windows.Perception.Spatial.SpatialCoordinateSystem unityCoordinateSystem = PerceptionInterop.GetSceneCoordinateSystem(UnityEngine.Pose.identity) as Windows.Perception.Spatial.SpatialCoordinateSystem;
 
                 sceneToUnityTransform = sceneCoordinateSystem.TryGetTransformTo(unityCoordinateSystem);
 
