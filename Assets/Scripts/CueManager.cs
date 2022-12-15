@@ -19,6 +19,7 @@ public class CueManager : MonoBehaviour
     public bool areCuesEnabled = true;
     public bool isFreezed = true;// value not changed
     public float timeBetweenSteps = 5f;
+    public float averageWalkingSpeed = 2f;
 
     public bool targetAutomaticSelection = true;
 

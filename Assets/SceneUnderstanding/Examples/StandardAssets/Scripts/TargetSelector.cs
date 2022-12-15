@@ -30,6 +30,7 @@ public class TargetSelector : MonoBehaviour
     bool hasDrawnLine = false;
     
     [SerializeField] private VisualCuesManager visualCuesManager;
+    [SerializeField] private FreezingDetector freezingDetector;
     public GameObject targetSymbol;
 
 
@@ -161,7 +162,7 @@ public class TargetSelector : MonoBehaviour
         if (variance < maxVarianceToConfirm)
         {
             timeSinceSmallVariance += Time.deltaTime;
-            if (timeSinceSmallVariance > minTimeToConfirm && (meanPosition - Camera.main.transform.position).magnitude > minDistanceToHead)
+            if (freezingDetector.hasFreezed && timeSinceSmallVariance > minTimeToConfirm && (meanPosition - Camera.main.transform.position).magnitude > minDistanceToHead)
             {
                 renderer.material.color = Color.blue;
                 if (!hasDrawnLine)
