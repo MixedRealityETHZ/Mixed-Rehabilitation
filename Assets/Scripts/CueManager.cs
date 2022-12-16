@@ -19,6 +19,8 @@ public class CueManager : MonoBehaviour
     [SerializeField] private SpriteRenderer circleIndicator;
     [SerializeField] private SampleMenu sampleMenu;
     [SerializeField] private GameObject welcomeMenu;
+    [SerializeField] private GameObject checkCalibrationMenu;
+    [SerializeField] private GameObject calibrationMenu;
 
     public bool areCuesEnabled = true;
     public bool isFreezed = true;// value not changed
@@ -52,26 +54,26 @@ public class CueManager : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        ShowWelcomeMenu();
+        ShowAndPlaceMenu(welcomeMenu);
+        sampleMenu.Hide();
+        checkCalibrationMenu.SetActive(false);
+        disableCues();
+        textIndicator.text = "Welcome";
+        circleIndicator.color = Color.white;
     }
     public void NewPointHeadTraking(Vector3 target)
     {
         visualCuesManager.NewPoint(target);
     }
-    public void ShowWelcomeMenu()
+    
+    public void ShowAndPlaceMenu(GameObject menu)
     {
-        welcomeMenu.SetActive(true);
-        //Move the welcome menu to the correct position
-        welcomeMenu.transform.position = Camera.main.transform.position + (Camera.main.transform.forward * 0.75f);
+        menu.SetActive(true);
+        //Move the  menu to the correct position
+        menu.transform.position = Camera.main.transform.position + (Camera.main.transform.forward * 0.75f);
         //Visuals foward vector is reversed, do a look from Camera to visuals to fix it.
-        welcomeMenu.transform.rotation = Quaternion.LookRotation(welcomeMenu.transform.position - Camera.main.transform.position);
+        menu.transform.rotation = Quaternion.LookRotation(menu.transform.position - Camera.main.transform.position);
     }
-
-    public void HideWelcomeMenu()
-    {
-        welcomeMenu.SetActive(false);
-    }
-
     public void enableCues()
     {
         areCuesEnabled = true;
@@ -135,8 +137,10 @@ public class CueManager : MonoBehaviour
     }
     public void StartCalibration()
     {
+        checkCalibrationMenu.SetActive(false);
+        calibrationMenu.SetActive(true);
         Debug.Log(" StartCalibration ");
-        HideWelcomeMenu();
+        welcomeMenu.SetActive(false);
         //Call calibration();
         textIndicator.text = "Calibrating";
         circleIndicator.color = Color.green;
@@ -146,14 +150,20 @@ public class CueManager : MonoBehaviour
     public void CheckCalibration()
     {
         Debug.Log("Finished calibration. Let user check if it is correct.");
-        StartCoroutine(DelayedDisableVoiceInputs());
+        ShowAndPlaceMenu(checkCalibrationMenu);
+        calibrationMenu.SetActive(false);
+        textIndicator.text = "Finished";
+        circleIndicator.color = Color.white;
     }
     public void FinishedCalibration()
     {
+        checkCalibrationMenu.SetActive(false);
         averageStepWidth = calibration.averageStepWidth;
         averageStride = calibration.averageStride;
         averageTimeBetweenSteps = calibration.averageTimeBetweenSteps;
         averageWalkingSpeed = calibration.averageWalkingSpeed;
+        StartCoroutine(DelayedDisableVoiceInputs());
+        
     }
 
     IEnumerator DelayedDisableVoiceInputs()
