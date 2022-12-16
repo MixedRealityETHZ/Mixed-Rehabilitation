@@ -28,7 +28,7 @@ public class TargetSelector : MonoBehaviour
     public float minDistanceToHead = 2.5f;
     // Has drawn a line to the target
     bool hasDrawnLine = false;
-    
+
     [SerializeField] private VisualCuesManager visualCuesManager;
     public GameObject targetSymbol;
 
@@ -89,7 +89,7 @@ public class TargetSelector : MonoBehaviour
     void UpdateTargetPosition()
     {
         //Vector3 hitPosition = CoreServices.InputSystem.EyeGazeProvider.HitPosition;
-        Vector3 hitPosition = new Vector3(0,0,0);
+        Vector3 hitPosition = new Vector3(0, 0, 0);
         RaycastHit raycastHit;
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.TransformDirection(Vector3.forward), out raycastHit, Mathf.Infinity))
         {
@@ -109,15 +109,16 @@ public class TargetSelector : MonoBehaviour
             }
             meanPosition /= positions.Length;
 
-        // Update the sphere
-        sphere.transform.position = meanPosition;
-        //sphere.transform.position = hitPosition;
-        // Show target symbol 1 meter in front of the user
-        Vector3 targetSymbolPosition = Camera.main.transform.position + 3*(hitPosition - Camera.main.transform.position).normalized;
-        targetSymbol.transform.position = targetSymbolPosition;
-        // Rotate the sphere so it's prependicular to the gaze
-        targetSymbol.transform.rotation = Quaternion.LookRotation(3*(hitPosition - Camera.main.transform.position).normalized, Vector3.up);
-    } 
+            // Update the sphere
+            sphere.transform.position = meanPosition;
+            //sphere.transform.position = hitPosition;
+            // Show target symbol 1 meter in front of the user
+            Vector3 targetSymbolPosition = Camera.main.transform.position + 3 * (hitPosition - Camera.main.transform.position).normalized;
+            targetSymbol.transform.position = targetSymbolPosition;
+            // Rotate the sphere so it's prependicular to the gaze
+            targetSymbol.transform.rotation = Quaternion.LookRotation(3 * (hitPosition - Camera.main.transform.position).normalized, Vector3.up);
+        }
+    }
     void UpdateTargetCalculation()
     {
 
@@ -149,14 +150,14 @@ public class TargetSelector : MonoBehaviour
             }
             variance /= positions.Length;
 
-        // Update the sphere
-        //sphere.transform.position = meanPosition;
-        sphere.transform.position = hitPosition;
-        // Show target symbol 2 meter in front of the user
-        Vector3 targetSymbolPosition = Camera.main.transform.position + (hitPosition - Camera.main.transform.position).normalized / 2;
-        targetSymbol.transform.position = targetSymbolPosition;
-        // Rotate the sphere so it's prependicular to the gaze
-        targetSymbol.transform.rotation = Quaternion.LookRotation((hitPosition - Camera.main.transform.position).normalized, Vector3.up);
+            // Update the sphere
+            //sphere.transform.position = meanPosition;
+            sphere.transform.position = hitPosition;
+            // Show target symbol 2 meter in front of the user
+            Vector3 targetSymbolPosition = Camera.main.transform.position + 3 * (hitPosition - Camera.main.transform.position).normalized / 2;
+            targetSymbol.transform.position = targetSymbolPosition;
+            // Rotate the sphere so it's prependicular to the gaze
+            targetSymbol.transform.rotation = Quaternion.LookRotation(3 * (hitPosition - Camera.main.transform.position).normalized, Vector3.up);
 
 
             // Update the color
