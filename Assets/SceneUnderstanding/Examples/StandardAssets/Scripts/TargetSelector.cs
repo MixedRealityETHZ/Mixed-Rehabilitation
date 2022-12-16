@@ -118,6 +118,16 @@ public class TargetSelector : MonoBehaviour
             // Rotate the sphere so it's prependicular to the gaze
             targetSymbol.transform.rotation = Quaternion.LookRotation((hitPosition - Camera.main.transform.position).normalized, Vector3.up);
         }
+        meanPosition /= positions.Length;
+
+        // Update the sphere
+        sphere.transform.position = meanPosition;
+        //sphere.transform.position = hitPosition;
+        // Show target symbol 1 meter in front of the user
+        Vector3 targetSymbolPosition = Camera.main.transform.position + 3*(hitPosition - Camera.main.transform.position).normalized;
+        targetSymbol.transform.position = targetSymbolPosition;
+        // Rotate the sphere so it's prependicular to the gaze
+        targetSymbol.transform.rotation = Quaternion.LookRotation(3*(hitPosition - Camera.main.transform.position).normalized, Vector3.up);
     } 
     void UpdateTargetCalculation()
     {
@@ -142,13 +152,14 @@ public class TargetSelector : MonoBehaviour
             }
             meanPosition /= positions.Length;
 
-            // Update the variance
-            variance = 0;
-            for (int i = 0; i < positions.Length; i++)
-            {
-                variance += (positions[i] - meanPosition).sqrMagnitude;
-            }
-            variance /= positions.Length;
+        // Update the sphere
+        //sphere.transform.position = meanPosition;
+        sphere.transform.position = hitPosition;
+        // Show target symbol 2 meter in front of the user
+        Vector3 targetSymbolPosition = Camera.main.transform.position + 3*(hitPosition - Camera.main.transform.position).normalized;
+        targetSymbol.transform.position = targetSymbolPosition;
+        // Rotate the sphere so it's prependicular to the gaze
+        targetSymbol.transform.rotation = Quaternion.LookRotation(3*(hitPosition - Camera.main.transform.position).normalized, Vector3.up);
 
             // Update the sphere
             //sphere.transform.position = meanPosition;
