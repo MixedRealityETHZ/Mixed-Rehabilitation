@@ -51,7 +51,9 @@
 
             // Appear on start
             //MixedRehabilitation. Originally this was not commented.
-            //StartCoroutine(DelayedShow()); 
+            //StartCoroutine(DelayedShow());
+            //MixedRehabilitation. Originally the following line did not exist
+            Hide();
         }
 
         IEnumerator DelayedShow()
