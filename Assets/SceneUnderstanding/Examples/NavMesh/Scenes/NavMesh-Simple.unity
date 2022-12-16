@@ -1676,7 +1676,6 @@ MonoBehaviour:
   lineRenderer: {fileID: 131731517}
   stepLength: 0.2
   stepWidth: 0.3
-  freezingDetector: {fileID: 116402232}
 --- !u!114 &574798404
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2033,6 +2032,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   soundManager: {fileID: 1324109875}
   visualCuesManager: {fileID: 574798404}
+  targetSelector: {fileID: 1359092233}
   sceneUnderstandingLabeler: {fileID: 89042200}
   sceneUnderstandingManager: {fileID: 1541835460}
   footprints: {fileID: 574798403}
@@ -2041,7 +2041,7 @@ MonoBehaviour:
   areCuesEnabled: 1
   isFreezed: 1
   timeBetweenSteps: 50
-  averageWalkingSpeed: 2
+  averageWalkingSpeed: 1.25
   targetAutomaticSelection: 1
 --- !u!4 &778286238
 Transform:
@@ -2930,7 +2930,6 @@ MonoBehaviour:
   maxVarianceToConfirm: 0.1
   minDistanceToHead: 3
   visualCuesManager: {fileID: 574798404}
-  freezingDetector: {fileID: 116402232}
   targetSymbol: {fileID: 1391021230}
 --- !u!135 &1359092234
 SphereCollider:
@@ -3422,7 +3421,7 @@ PrefabInstance:
     - target: {fileID: 1654952326856315522, guid: a9b7988b52547e14899219ced698f6b2,
         type: 3}
       propertyPath: QuerySceneFromDevice
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1654952326856315522, guid: a9b7988b52547e14899219ced698f6b2,
         type: 3}

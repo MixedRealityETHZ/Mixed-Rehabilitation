@@ -9,6 +9,7 @@ public class CueManager : MonoBehaviour
 
     [SerializeField] private SoundManager soundManager;
     [SerializeField] private VisualCuesManager visualCuesManager;
+    [SerializeField] private TargetSelector targetSelector;
 
     [SerializeField] private SceneUnderstandingLabeler sceneUnderstandingLabeler;
     [SerializeField] private SceneUnderstandingManager sceneUnderstandingManager;
@@ -71,16 +72,18 @@ public class CueManager : MonoBehaviour
 
     public void UserHasFreezed() {
         isFreezed = true;
-        // Show line and footprints
+        // Show line, footprints, target cross and target sphere
         footprints.ShowFootprintsAndLine();
         visualCuesManager.lineRenderer.enabled = true;
+        targetSelector.ShowTargetCrossAndSphere();
     }
     public void UserHasUnfreezed()
     {
         isFreezed = false;
-        // Hide line and footprints
+        // Hide line, footprints, target cross and target sphere
         footprints.HideFootprintsAndLine();
         visualCuesManager.lineRenderer.enabled = false;
+        targetSelector.HideTargetCrossAndSphere();
     }
     public void DisableDisplayingSceneRoom()
     {
