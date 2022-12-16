@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FreezingDetector : MonoBehaviour
 {
-    public bool hasFreezed = false;
+    public bool isFreezing = false;
     private float averageWalkingSpeed
     {
         get
@@ -45,13 +45,15 @@ public class FreezingDetector : MonoBehaviour
         }
         currentWalkingSpeed = distance / time;
 
-        if (currentWalkingSpeed < 0.7 * averageWalkingSpeed) // instead of `0.7 * averageWalkingSpeed`, use something like `averageWalkingSpeed - x * stdDev` in the future
+        if (currentWalkingSpeed < 0.3 * averageWalkingSpeed) // instead of `0.3 * averageWalkingSpeed`, use something like `averageWalkingSpeed - x * stdDev` in the future
         {
-            hasFreezed = true;
+            isFreezing = true;
+            CueManager.Instance.UserHasFreezed();
         }
-        else
+        else if (currentWalkingSpeed > 0.7 * averageWalkingSpeed)
         {
-            hasFreezed = false;
+            isFreezing = false;
+            CueManager.Instance.UserHasUnfreezed();
         }
     }
 }

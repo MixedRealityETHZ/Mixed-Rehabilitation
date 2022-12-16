@@ -71,10 +71,16 @@ public class CueManager : MonoBehaviour
 
     public void UserHasFreezed() {
         isFreezed = true;
+        // Show line and footprints
+        footprints.ShowFootprintsAndLine();
+        visualCuesManager.lineRenderer.enabled = true;
     }
-    public void UserFinishedFreezing()
+    public void UserHasUnfreezed()
     {
         isFreezed = false;
+        // Hide line and footprints
+        footprints.HideFootprintsAndLine();
+        visualCuesManager.lineRenderer.enabled = false;
     }
     public void DisableDisplayingSceneRoom()
     {

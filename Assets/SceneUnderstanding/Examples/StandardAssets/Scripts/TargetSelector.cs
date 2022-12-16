@@ -162,7 +162,7 @@ public class TargetSelector : MonoBehaviour
         if (variance < maxVarianceToConfirm)
         {
             timeSinceSmallVariance += Time.deltaTime;
-            if (freezingDetector.hasFreezed && timeSinceSmallVariance > minTimeToConfirm && (meanPosition - Camera.main.transform.position).magnitude > minDistanceToHead)
+            if (freezingDetector.isFreezing && timeSinceSmallVariance > minTimeToConfirm && (meanPosition - Camera.main.transform.position).magnitude > minDistanceToHead)
             {
                 renderer.material.color = Color.blue;
                 if (!hasDrawnLine)

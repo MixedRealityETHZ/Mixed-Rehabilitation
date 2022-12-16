@@ -401,7 +401,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b64dc0566e57cf047844e1d7041a5f6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hasFreezed: 0
+  isFreezing: 0
   currentWalkingSpeed: 0
 --- !u!4 &116402233
 Transform:
@@ -1676,6 +1676,7 @@ MonoBehaviour:
   lineRenderer: {fileID: 131731517}
   stepLength: 0.2
   stepWidth: 0.3
+  freezingDetector: {fileID: 116402232}
 --- !u!114 &574798404
 MonoBehaviour:
   m_ObjectHideFlags: 0
