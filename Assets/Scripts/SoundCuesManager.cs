@@ -12,7 +12,7 @@ public class SoundCuesManager : MonoBehaviour
         if (CueManager.Instance.areCuesEnabled && CueManager.Instance.isFreezed)
         {
             soundCueChronometer += Time.deltaTime;
-            if (soundCueChronometer > CueManager.Instance.timeBetweenSteps)
+            if (soundCueChronometer > CueManager.Instance.averageTimeBetweenSteps)
             {
                 SoundManager.Instance.PlaySoundCue();
                 soundCueChronometer = 0;

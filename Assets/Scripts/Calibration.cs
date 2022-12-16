@@ -18,13 +18,15 @@ public class Calibration : MonoBehaviour
     
     private int lastHeadPositionIndex = 0;
     private const int movingAverageWindowSize = 9;
-    private Vector3[] lastHeadPositions = new Vector3[800 + movingAverageWindowSize - 1];
-    private Vector3[] movingAverageHeadPositions = new Vector3[800];
-    private float[] times = new float[800 + movingAverageWindowSize - 1];
+    private const int sampleSize = 500; // 500 samples correspond to 10 seconds of data
+    private Vector3[] lastHeadPositions = new Vector3[sampleSize + movingAverageWindowSize - 1];
+    private Vector3[] movingAverageHeadPositions = new Vector3[sampleSize];
+    private float[] times = new float[sampleSize + movingAverageWindowSize - 1];
 
     public float averageStride = 0.0f;
     public float averageStepWidth = 0.0f;
     public float averageTimeBetweenSteps = 0.0f;
+    public float averageWalkingSpeed = 1.25f;
 
     // Start is called before the first frame update
     void Start()
@@ -196,7 +198,10 @@ public class Calibration : MonoBehaviour
         return (localMaximaIndices, localMinimaIndices);
     }
 
-
+    /// <summary>
+    /// Calibrates the headset by calculating the average of the last 10 seconds of head movement
+    /// </summary>
+    /// <returns>Average stride and average step width</returns>
     (float stride, float width) Calibrate()
     {
         /* We want to track the head height of the user. If the user is not calibrated, we want to show a button to calibrate the user.
@@ -226,7 +231,7 @@ public class Calibration : MonoBehaviour
         // where the time between two local maxima is always greater than a 0.5s and smaller than 1.3s
 
         // If there are at least 5 local maxima and minima, we want to calculate the average time between steps, the average step width and the average stride
-        if (localMaximaIndices.Count >= 5 && localMinimaIndices.Count >= 5)
+        if (localMaximaIndices.Count >= 5)
         {
             // Calculate the average time between steps
             averageTimeBetweenSteps = 0.0f;
@@ -291,6 +296,7 @@ public class Calibration : MonoBehaviour
             return (averageStride, averageStepWidth);
         } else
         {
+            Debug.Log("Not enough local maxima and minima. Local maxima: " + localMaximaIndices.Count + ", local minima: " + localMinimaIndices.Count);
             return (0, 0);
         }
     }
@@ -312,10 +318,12 @@ public class Calibration : MonoBehaviour
         isCalibrated = false;
         
         // Wait for the user to walk for a few seconds
-        yield return new WaitForSeconds(5.0f);
+        yield return new WaitForSeconds(10.0f);
 
         // Calculate the average time between steps, the average step width and the average stride
         Calibrate();
+
+        CueManager.Instance.CheckCalibration();
     }
 
     // Update is called once per frame
@@ -334,12 +342,6 @@ public class Calibration : MonoBehaviour
         if (lastHeadPositionIndex == lastHeadPositions.Length)
         {
             lastHeadPositionIndex = 0;
-        }
-
-        // If the user isn't calibrated, do it
-        if (!isCalibrated)
-        {
-            StartCoroutine(CalibrateCoroutine());
         }
     }
 }
