@@ -67,7 +67,6 @@ public class CueManager : MonoBehaviour
     public void HideWelcomeMenu()
     {
         welcomeMenu.SetActive(false);
-        disableCues();
     }
 
     public void enableCues()
@@ -77,7 +76,6 @@ public class CueManager : MonoBehaviour
         SoundManager.Instance.PlaySoundOn();
         circleIndicator.color = Color.green;
         textIndicator.text = "Cues On";
-        sceneUnderstandingManager.DisplayDataAsync();
 
     }
     public void disableCues()
@@ -89,7 +87,6 @@ public class CueManager : MonoBehaviour
         visualCuesManager.DestroyStraightPath();
         circleIndicator.color = Color.red;
         textIndicator.text = "Cues Off";
-        sceneUnderstandingManager.DisplayDataAsync();
     }
 
     public void UserHasFreezed() {
@@ -110,12 +107,19 @@ public class CueManager : MonoBehaviour
     public void DisableDisplayingSceneRoom()
     {
         sceneUnderstandingManager.mixedRehabilittion_DisplayMeshes = false;
-        sceneUnderstandingLabeler.DisplayTextLabels = false;
+        UpdateScene();
     }
+
+    
     public void EnableDisplayingSceneRoom()
     {
         sceneUnderstandingManager.mixedRehabilittion_DisplayMeshes = true;
-        sceneUnderstandingLabeler.DisplayTextLabels = true;
+        UpdateScene();
+    }
+
+    private async void UpdateScene()
+    {
+        await sceneUnderstandingManager.DisplayDataAsync();
     }
     public void ShowHelpMenu()
     {
