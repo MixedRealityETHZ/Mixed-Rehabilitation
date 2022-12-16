@@ -209,4 +209,15 @@ public class TargetSelector : MonoBehaviour
 
     }
 
+    public void ShowTargetCrossAndSphere()
+    {
+        targetSymbol.SetActive(true);
+        sphere.SetActive(true);
+    }
+
+    public void HideTargetCrossAndSphere()
+    {
+        targetSymbol.SetActive(false);
+        sphere.SetActive(false);
+    }
 }

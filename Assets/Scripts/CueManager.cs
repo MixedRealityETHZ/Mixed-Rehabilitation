@@ -9,6 +9,8 @@ public class CueManager : MonoBehaviour
 
     [SerializeField] private SoundManager soundManager;
     [SerializeField] private VisualCuesManager visualCuesManager;
+    [SerializeField] private TargetSelector targetSelector;
+
     [SerializeField] private SceneUnderstandingLabeler sceneUnderstandingLabeler;
     [SerializeField] private SceneUnderstandingManager sceneUnderstandingManager;
     [SerializeField] private Footprints footprints;
@@ -20,6 +22,7 @@ public class CueManager : MonoBehaviour
     public bool areCuesEnabled = true;
     public bool isFreezed = true;// value not changed
     public float timeBetweenSteps = 5f;
+    public float averageWalkingSpeed = 2f;
 
     public bool targetAutomaticSelection = true;
 
@@ -88,10 +91,18 @@ public class CueManager : MonoBehaviour
 
     public void UserHasFreezed() {
         isFreezed = true;
+        // Show line, footprints, target cross and target sphere
+        footprints.ShowFootprintsAndLine();
+        visualCuesManager.lineRenderer.enabled = true;
+        targetSelector.ShowTargetCrossAndSphere();
     }
-    public void UserFinishedFreezing()
+    public void UserHasUnfreezed()
     {
         isFreezed = false;
+        // Hide line, footprints, target cross and target sphere
+        footprints.HideFootprintsAndLine();
+        visualCuesManager.lineRenderer.enabled = false;
+        targetSelector.HideTargetCrossAndSphere();
     }
     public void DisableDisplayingSceneRoom()
     {

@@ -34,7 +34,6 @@ public class Footprints : MonoBehaviour
     public float stepWidth = 0.4f;
     private bool isFirstFootprint = true;
 
-
     // Start is called before the first frame update
     void Start()
     {
@@ -162,10 +161,33 @@ public class Footprints : MonoBehaviour
                 // Set the player's last position to the current position.
                 lastPositionFootprint = currentPosition;
             }
-        }  
-
-        
+        }
     }
+
+    public void ShowFootprintsAndLine()
+    {
+        foreach (GameObject footprint in footprints)
+        {
+            if (footprint != null)
+            {
+                footprint.SetActive(true);
+            }
+        }
+        lineRenderer.enabled = true;
+    }
+
+    public void HideFootprintsAndLine()
+    {
+        foreach (GameObject footprint in footprints)
+        {
+            if (footprint != null)
+            {
+                footprint.SetActive(false);
+            }
+        }
+        lineRenderer.enabled = false;
+    }
+
     public void DestroyFootprints()
     {
         // Destroy all footprints.
