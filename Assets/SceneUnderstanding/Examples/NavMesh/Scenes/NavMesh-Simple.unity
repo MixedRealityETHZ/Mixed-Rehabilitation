@@ -806,6 +806,11 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 6838612915682072451, guid: 9e92419956a00654aafabc6885e89266,
+        type: 3}
+      propertyPath: m_Name
+      value: MenuInstructions
+      objectReference: {fileID: 0}
     - target: {fileID: 7351148018992450299, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
       propertyPath: PivotAxis
@@ -819,12 +824,66 @@ PrefabInstance:
     - target: {fileID: 7616938574011737949, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
       propertyPath: m_text
-      value: 'This a list with the voice commands with '
+      value: 'From now on, this app will display visual and auditory cues if a a
+        gait freezing episode is detected.
+
+        You can disable and enable the
+        cues by saying "Off", "On".
+
+        All the action allowed are listed below
+
+        You
+        can open again this menu by saying "Help", and close it by saying "Close"'
+      objectReference: {fileID: 0}
+    - target: {fileID: 7616938574011737949, guid: 9e92419956a00654aafabc6885e89266,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 48.51
+      objectReference: {fileID: 0}
+    - target: {fileID: 7616938574011737949, guid: 9e92419956a00654aafabc6885e89266,
+        type: 3}
+      propertyPath: m_margin.w
+      value: -21.523556
+      objectReference: {fileID: 0}
+    - target: {fileID: 7616938574011737949, guid: 9e92419956a00654aafabc6885e89266,
+        type: 3}
+      propertyPath: m_margin.z
+      value: -45.979706
+      objectReference: {fileID: 0}
+    - target: {fileID: 7616938574011737949, guid: 9e92419956a00654aafabc6885e89266,
+        type: 3}
+      propertyPath: m_fontSizeBase
+      value: 48.51
+      objectReference: {fileID: 0}
+    - target: {fileID: 7616938574011737949, guid: 9e92419956a00654aafabc6885e89266,
+        type: 3}
+      propertyPath: m_overflowMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7616938574011737949, guid: 9e92419956a00654aafabc6885e89266,
+        type: 3}
+      propertyPath: m_textAlignment
+      value: 65535
       objectReference: {fileID: 0}
     - target: {fileID: 7616938574011737949, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
       propertyPath: m_TextStyleHashCode
       value: -1183493901
+      objectReference: {fileID: 0}
+    - target: {fileID: 7616938574011737949, guid: 9e92419956a00654aafabc6885e89266,
+        type: 3}
+      propertyPath: m_VerticalAlignment
+      value: 512
+      objectReference: {fileID: 0}
+    - target: {fileID: 7616938574011737949, guid: 9e92419956a00654aafabc6885e89266,
+        type: 3}
+      propertyPath: m_enableWordWrapping
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7616938574011737949, guid: 9e92419956a00654aafabc6885e89266,
+        type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7942613190837443120, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
@@ -844,7 +903,7 @@ PrefabInstance:
     - target: {fileID: 8426562319273264626, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
       propertyPath: m_text
-      value: Welcome to Gait Freeing Rehabilitation App!
+      value: Instructions Menu
       objectReference: {fileID: 0}
     - target: {fileID: 8426562319273264626, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
@@ -969,142 +1028,187 @@ PrefabInstance:
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
       propertyPath: inputActions.Array.size
-      value: 8
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
       propertyPath: inputActions.Array.data[0].key
-      value: 116
+      value: 99
       objectReference: {fileID: 0}
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
       propertyPath: inputActions.Array.data[1].key
-      value: 110
+      value: 97
       objectReference: {fileID: 0}
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
       propertyPath: inputActions.Array.data[2].key
-      value: 102
+      value: 99
       objectReference: {fileID: 0}
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
       propertyPath: inputActions.Array.data[3].key
-      value: 275
+      value: 99
       objectReference: {fileID: 0}
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
       propertyPath: inputActions.Array.data[4].key
-      value: 274
+      value: 99
       objectReference: {fileID: 0}
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
       propertyPath: inputActions.Array.data[5].key
-      value: 127
+      value: 99
       objectReference: {fileID: 0}
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
       propertyPath: inputActions.Array.data[6].key
-      value: 115
+      value: 99
       objectReference: {fileID: 0}
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
       propertyPath: inputActions.Array.data[7].key
-      value: 105
+      value: 99
       objectReference: {fileID: 0}
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
       propertyPath: inputActions.Array.data[8].key
-      value: 105
+      value: 99
+      objectReference: {fileID: 0}
+    - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
+        type: 3}
+      propertyPath: inputActions.Array.data[9].key
+      value: 99
+      objectReference: {fileID: 0}
+    - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
+        type: 3}
+      propertyPath: inputActions.Array.data[10].key
+      value: 99
+      objectReference: {fileID: 0}
+    - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
+        type: 3}
+      propertyPath: inputActions.Array.data[11].key
+      value: 99
       objectReference: {fileID: 0}
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
       propertyPath: inputActions.Array.data[0].phrase
-      value: Target
+      value: Calibrate
       objectReference: {fileID: 0}
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
       propertyPath: inputActions.Array.data[1].phrase
-      value: On
+      value: Start
       objectReference: {fileID: 0}
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
       propertyPath: inputActions.Array.data[2].phrase
-      value: Off
+      value: Close
       objectReference: {fileID: 0}
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
       propertyPath: inputActions.Array.data[3].phrase
-      value: Record
+      value: Close
       objectReference: {fileID: 0}
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
       propertyPath: inputActions.Array.data[4].phrase
-      value: Save
+      value: Close
       objectReference: {fileID: 0}
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
       propertyPath: inputActions.Array.data[5].phrase
-      value: Quit
+      value: Close
       objectReference: {fileID: 0}
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
       propertyPath: inputActions.Array.data[6].phrase
-      value: Show
+      value: Close
       objectReference: {fileID: 0}
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
       propertyPath: inputActions.Array.data[7].phrase
-      value: Hide
+      value: Close
       objectReference: {fileID: 0}
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
       propertyPath: inputActions.Array.data[8].phrase
-      value: Hide
+      value: Close
+      objectReference: {fileID: 0}
+    - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
+        type: 3}
+      propertyPath: inputActions.Array.data[9].phrase
+      value: Close
+      objectReference: {fileID: 0}
+    - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
+        type: 3}
+      propertyPath: inputActions.Array.data[10].phrase
+      value: Close
+      objectReference: {fileID: 0}
+    - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
+        type: 3}
+      propertyPath: inputActions.Array.data[11].phrase
+      value: Close
       objectReference: {fileID: 0}
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
       propertyPath: inputActions.Array.data[0].description
-      value: Set new locomotion target
+      value: Starts the callibration
       objectReference: {fileID: 0}
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
       propertyPath: inputActions.Array.data[1].description
-      value: Enable cues
+      value: Finishes the callibration
       objectReference: {fileID: 0}
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
       propertyPath: inputActions.Array.data[2].description
-      value: Disable cues
+      value: Shows the instructions menu
       objectReference: {fileID: 0}
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
       propertyPath: inputActions.Array.data[3].description
-      value: Record gait data
+      value: Shows the instructions menu
       objectReference: {fileID: 0}
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
       propertyPath: inputActions.Array.data[4].description
-      value: Save gait data
+      value: Shows the instructions menu
       objectReference: {fileID: 0}
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
       propertyPath: inputActions.Array.data[5].description
-      value: Quit application
+      value: Shows the instructions menu
       objectReference: {fileID: 0}
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
       propertyPath: inputActions.Array.data[6].description
-      value: Show the scene understanding scene
+      value: Shows the instructions menu
       objectReference: {fileID: 0}
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
       propertyPath: inputActions.Array.data[7].description
-      value: Show the scene understanding scene
+      value: Shows the instructions menu
       objectReference: {fileID: 0}
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
       propertyPath: inputActions.Array.data[8].description
-      value: Show the scene understanding scene
+      value: Shows the instructions menu
+      objectReference: {fileID: 0}
+    - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
+        type: 3}
+      propertyPath: inputActions.Array.data[9].description
+      value: Shows the instructions menu
+      objectReference: {fileID: 0}
+    - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
+        type: 3}
+      propertyPath: inputActions.Array.data[10].description
+      value: Shows the instructions menu
+      objectReference: {fileID: 0}
+    - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
+        type: 3}
+      propertyPath: inputActions.Array.data[11].description
+      value: Shows the instructions menu
       objectReference: {fileID: 0}
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
@@ -1149,6 +1253,21 @@ PrefabInstance:
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
       propertyPath: inputActions.Array.data[8].handler.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
+        type: 3}
+      propertyPath: inputActions.Array.data[9].handler.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
+        type: 3}
+      propertyPath: inputActions.Array.data[10].handler.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
+        type: 3}
+      propertyPath: inputActions.Array.data[11].handler.m_PersistentCalls.m_Calls.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
@@ -1203,9 +1322,29 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
+      propertyPath: inputActions.Array.data[9].handler.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
+        type: 3}
+      propertyPath: inputActions.Array.data[9].handler.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
+        type: 3}
+      propertyPath: inputActions.Array.data[10].handler.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
+        type: 3}
+      propertyPath: inputActions.Array.data[11].handler.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
+        type: 3}
       propertyPath: inputActions.Array.data[0].handler.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1359092233}
+      objectReference: {fileID: 778286237}
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
       propertyPath: inputActions.Array.data[1].handler.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -1225,17 +1364,17 @@ PrefabInstance:
         type: 3}
       propertyPath: inputActions.Array.data[3].handler.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 574798406}
+      objectReference: {fileID: 778286237}
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
       propertyPath: inputActions.Array.data[4].handler.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 574798406}
+      objectReference: {fileID: 778286237}
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
       propertyPath: inputActions.Array.data[5].handler.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 574798406}
+      objectReference: {fileID: 778286237}
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
       propertyPath: inputActions.Array.data[6].handler.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -1249,6 +1388,21 @@ PrefabInstance:
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
       propertyPath: inputActions.Array.data[8].handler.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 778286237}
+    - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
+        type: 3}
+      propertyPath: inputActions.Array.data[9].handler.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 778286237}
+    - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
+        type: 3}
+      propertyPath: inputActions.Array.data[10].handler.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 778286237}
+    - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
+        type: 3}
+      propertyPath: inputActions.Array.data[11].handler.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 778286237}
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
@@ -1303,18 +1457,38 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
+      propertyPath: inputActions.Array.data[9].handler.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
+        type: 3}
+      propertyPath: inputActions.Array.data[9].handler.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
+        type: 3}
       propertyPath: inputActions.Array.data[0].handler.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: VoiceCommandCalculateTarget
+      value: StartCalibration
+      objectReference: {fileID: 0}
+    - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
+        type: 3}
+      propertyPath: inputActions.Array.data[10].handler.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
+        type: 3}
+      propertyPath: inputActions.Array.data[11].handler.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
       propertyPath: inputActions.Array.data[1].handler.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: enableCues
+      value: FinishedCalibration
       objectReference: {fileID: 0}
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
       propertyPath: inputActions.Array.data[2].handler.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: disableCues
+      value: CloseHelpMenu
       objectReference: {fileID: 0}
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
@@ -1324,37 +1498,52 @@ PrefabInstance:
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
       propertyPath: inputActions.Array.data[3].handler.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: StartRecording
+      value: CloseHelpMenu
       objectReference: {fileID: 0}
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
       propertyPath: inputActions.Array.data[4].handler.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SaveNCreateNewFile
+      value: CloseHelpMenu
       objectReference: {fileID: 0}
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
       propertyPath: inputActions.Array.data[5].handler.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Quit
+      value: CloseHelpMenu
       objectReference: {fileID: 0}
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
       propertyPath: inputActions.Array.data[6].handler.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: EnableDisplayingSceneRoom
+      value: CloseHelpMenu
       objectReference: {fileID: 0}
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
       propertyPath: inputActions.Array.data[7].handler.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: DisableDisplayingSceneRoom
+      value: CloseHelpMenu
       objectReference: {fileID: 0}
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
       propertyPath: inputActions.Array.data[8].handler.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: DisableDisplayingSceneRoom
+      value: CloseHelpMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
+        type: 3}
+      propertyPath: inputActions.Array.data[9].handler.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: CloseHelpMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
+        type: 3}
+      propertyPath: inputActions.Array.data[10].handler.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: CloseHelpMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
+        type: 3}
+      propertyPath: inputActions.Array.data[11].handler.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: CloseHelpMenu
       objectReference: {fileID: 0}
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
       propertyPath: inputActions.Array.data[0].handler.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: TargetSelector, Assembly-CSharp
+      value: CueManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
@@ -1374,17 +1563,17 @@ PrefabInstance:
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
       propertyPath: inputActions.Array.data[3].handler.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: PoseTracking, Assembly-CSharp
+      value: CueManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
       propertyPath: inputActions.Array.data[4].handler.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: PoseTracking, Assembly-CSharp
+      value: CueManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
       propertyPath: inputActions.Array.data[5].handler.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: PoseTracking, Assembly-CSharp
+      value: CueManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
@@ -1399,6 +1588,26 @@ PrefabInstance:
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
       propertyPath: inputActions.Array.data[8].handler.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: CueManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
+        type: 3}
+      propertyPath: inputActions.Array.data[9].handler.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: CueManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
+        type: 3}
+      propertyPath: inputActions.Array.data[9].handler.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: Callibrator, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
+        type: 3}
+      propertyPath: inputActions.Array.data[10].handler.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: CueManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
+        type: 3}
+      propertyPath: inputActions.Array.data[11].handler.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: CueManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
@@ -1449,6 +1658,21 @@ PrefabInstance:
     - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
         type: 3}
       propertyPath: inputActions.Array.data[8].handler.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
+        type: 3}
+      propertyPath: inputActions.Array.data[9].handler.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
+        type: 3}
+      propertyPath: inputActions.Array.data[10].handler.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 8426562319953196670, guid: 9e92419956a00654aafabc6885e89266,
+        type: 3}
+      propertyPath: inputActions.Array.data[11].handler.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 8957078091139003145, guid: 9e92419956a00654aafabc6885e89266,
@@ -1574,6 +1798,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sampleMenu: {fileID: 1795520016}
+  welcomeMenu: {fileID: 1521243024}
+  textIndicator: {fileID: 850933577}
+  circleIndicator: {fileID: 1634724364}
 --- !u!4 &513219675
 Transform:
   m_ObjectHideFlags: 0
@@ -1585,10 +1812,9 @@ Transform:
   m_LocalPosition: {x: -0.06451464, y: 0.038749255, z: 0.78623533}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1521243025}
+  m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &574798402
 GameObject:
@@ -1989,8 +2215,10 @@ MonoBehaviour:
   sceneUnderstandingLabeler: {fileID: 89042200}
   sceneUnderstandingManager: {fileID: 1541835460}
   footprints: {fileID: 574798403}
-  textCuesOnOff: {fileID: 850933577}
-  circleCuesOnOff: {fileID: 1634724364}
+  textIndicator: {fileID: 850933577}
+  circleIndicator: {fileID: 1634724364}
+  sampleMenu: {fileID: 1795520016}
+  welcomeMenu: {fileID: 1521243024}
   areCuesEnabled: 1
   isFreezed: 1
   timeBetweenSteps: 50
@@ -2022,7 +2250,7 @@ GameObject:
   - component: {fileID: 850933578}
   - component: {fileID: 850933577}
   m_Layer: 2
-  m_Name: Text Cues On Off
+  m_Name: Text Indicator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2068,7 +2296,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Cues on
+  m_text: Welcome
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2197,7 +2425,7 @@ PrefabInstance:
     - target: {fileID: 1446068841586358895, guid: cf93ba84468503440bef5b91e74f843b,
         type: 3}
       propertyPath: m_RootOrder
-      value: 19
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1446068841586358895, guid: cf93ba84468503440bef5b91e74f843b,
         type: 3}
@@ -2959,7 +3187,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1385473819
 GameObject:
@@ -2972,7 +3200,7 @@ GameObject:
   - component: {fileID: 1385473820}
   - component: {fileID: 1385473821}
   m_Layer: 0
-  m_Name: MenuVisuals
+  m_Name: StatusIndicator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3078,7 +3306,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1488949744}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -7.1}
+  m_LocalPosition: {x: 0, y: 0, z: -2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3256,7 +3484,7 @@ GameObject:
   - component: {fileID: 1521243025}
   - component: {fileID: 1521243026}
   m_Layer: 0
-  m_Name: MenuVisuals
+  m_Name: WelcomeMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3270,7 +3498,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1521243024}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -4.7862353}
+  m_LocalPosition: {x: 0, y: 0, z: -4}
   m_LocalScale: {x: 0.0015, y: 0.0015, z: 0.0015}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3281,12 +3509,12 @@ RectTransform:
   - {fileID: 1673209782}
   - {fileID: 1184595095}
   - {fileID: 1621895914}
-  m_Father: {fileID: 513219675}
-  m_RootOrder: 0
+  m_Father: {fileID: 0}
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.06451464, y: -0.038749255}
+  m_AnchoredPosition: {x: -42.945244, y: 25.794088}
   m_SizeDelta: {x: 200, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1521243026
@@ -3940,7 +4168,7 @@ GameObject:
   - component: {fileID: 1634724363}
   - component: {fileID: 1634724364}
   m_Layer: 0
-  m_Name: Circle Cues On Off
+  m_Name: Circle Indicator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4009,7 +4237,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847,
     type: 3}
-  m_Color: {r: 0.004499674, g: 1, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

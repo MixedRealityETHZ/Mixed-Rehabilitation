@@ -128,8 +128,9 @@
 
         [Space(10)]
         [Tooltip("The list of inputs and their respective actions.")]
+        ///MixedRehabilitation. The following variable was private
         [SerializeField]
-        private List<InputAction> inputActions = new List<InputAction>();
+        public List<InputAction> inputActions = new List<InputAction>();
 
         #endregion // Unity Inspector Fields
 
@@ -434,7 +435,10 @@
             {
                 keywordRecognizer.Stop();
                 keywordRecognizer.OnPhraseRecognized -= OnPhraseRecognized;
-                keywordRecognizer = null;
+                //MixedRehabilitation. The following line was uncommented
+                //keywordRecognizer = null;
+                //MixedRehabilitation. The following line has been added
+                keywordRecognizer.Dispose();
             }
 
             // Clear input maps
