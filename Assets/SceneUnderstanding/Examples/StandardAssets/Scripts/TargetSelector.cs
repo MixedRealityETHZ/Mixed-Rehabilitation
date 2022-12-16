@@ -37,7 +37,6 @@ public class TargetSelector : MonoBehaviour
     void Start()
     {
         sphere = gameObject;
-        CoreServices.InputSystem.EyeGazeProvider.Enabled = true;
         if (visualCuesManager == null)
         {
             visualCuesManager = GameObject.Find("PathManager").GetComponent<VisualCuesManager>();
@@ -88,7 +87,7 @@ public class TargetSelector : MonoBehaviour
     }
     void UpdateTargetPosition()
     {
-        Vector3 hitPosition = CoreServices.InputSystem.EyeGazeProvider.HitPosition;
+        Vector3 hitPosition = Vector3.zero;
         RaycastHit raycastHit;
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.TransformDirection(Vector3.forward), out raycastHit, Mathf.Infinity))
         {
@@ -120,7 +119,7 @@ public class TargetSelector : MonoBehaviour
     void UpdateTargetCalculation()
     {
 
-        Vector3 hitPosition = CoreServices.InputSystem.EyeGazeProvider.HitPosition;
+        Vector3 hitPosition = Vector3.zero;
         RaycastHit raycastHit;
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.TransformDirection(Vector3.forward), out raycastHit, Mathf.Infinity))
         {

@@ -10,6 +10,7 @@ public class CueManager : MonoBehaviour
     [SerializeField] private SoundManager soundManager;
     [SerializeField] private VisualCuesManager visualCuesManager;
     [SerializeField] private TargetSelector targetSelector;
+    [SerializeField] private Calibration calibration;
 
     [SerializeField] private SceneUnderstandingLabeler sceneUnderstandingLabeler;
     [SerializeField] private SceneUnderstandingManager sceneUnderstandingManager;
@@ -21,7 +22,9 @@ public class CueManager : MonoBehaviour
 
     public bool areCuesEnabled = true;
     public bool isFreezed = true;// value not changed
-    public float timeBetweenSteps = 5f;
+    public float averageTimeBetweenSteps = 5f;
+    public float averageStride = 0.0f;
+    public float averageStepWidth = 0.0f;
     public float averageWalkingSpeed = 2f;
 
     public bool targetAutomaticSelection = true;
@@ -137,13 +140,20 @@ public class CueManager : MonoBehaviour
         //Call calibration();
         textIndicator.text = "Calibrating";
         circleIndicator.color = Color.green;
+        StartCoroutine(calibration.CalibrateCoroutine());
     }
     
+    public void CheckCalibration()
+    {
+        Debug.Log("Finished calibration. Let user check if it is correct.");
+        StartCoroutine(DelayedDisableVoiceInputs());
+    }
     public void FinishedCalibration()
     {
-        Debug.Log("FinishedCalibration");
-        StartCoroutine(DelayedDisableVoiceInputs());
-        
+        averageStepWidth = calibration.averageStepWidth;
+        averageStride = calibration.averageStride;
+        averageTimeBetweenSteps = calibration.averageTimeBetweenSteps;
+        averageWalkingSpeed = calibration.averageWalkingSpeed;
     }
 
     IEnumerator DelayedDisableVoiceInputs()

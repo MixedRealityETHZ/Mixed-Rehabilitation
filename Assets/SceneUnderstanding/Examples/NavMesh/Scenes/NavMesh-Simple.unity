@@ -416,7 +416,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 20
+  m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &131731516
 GameObject:
@@ -1860,7 +1860,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &574798402
 GameObject:
@@ -2227,6 +2227,54 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &694116179
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 694116181}
+  - component: {fileID: 694116180}
+  m_Layer: 0
+  m_Name: Calibration
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &694116180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 694116179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54d40d5edb9a15d4baecb1cb37b97c2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  averageStride: 0
+  averageStepWidth: 0
+  averageTimeBetweenSteps: 0
+  averageWalkingSpeed: 1.25
+--- !u!4 &694116181
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 694116179}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 18
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &778286236
 GameObject:
   m_ObjectHideFlags: 0
@@ -2259,6 +2307,7 @@ MonoBehaviour:
   soundManager: {fileID: 1324109875}
   visualCuesManager: {fileID: 574798404}
   targetSelector: {fileID: 1359092233}
+  calibration: {fileID: 694116180}
   sceneUnderstandingLabeler: {fileID: 89042200}
   sceneUnderstandingManager: {fileID: 1541835460}
   footprints: {fileID: 574798403}
@@ -2268,7 +2317,9 @@ MonoBehaviour:
   welcomeMenu: {fileID: 1521243024}
   areCuesEnabled: 1
   isFreezed: 1
-  timeBetweenSteps: 50
+  averageTimeBetweenSteps: 5
+  averageStride: 0
+  averageStepWidth: 0
   averageWalkingSpeed: 1.25
   targetAutomaticSelection: 1
 --- !u!4 &778286238
@@ -2473,7 +2524,7 @@ PrefabInstance:
     - target: {fileID: 1446068841586358895, guid: cf93ba84468503440bef5b91e74f843b,
         type: 3}
       propertyPath: m_RootOrder
-      value: 20
+      value: 21
       objectReference: {fileID: 0}
     - target: {fileID: 1446068841586358895, guid: cf93ba84468503440bef5b91e74f843b,
         type: 3}
@@ -3235,7 +3286,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 19
+  m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1385473819
 GameObject:
@@ -3649,7 +3700,7 @@ PrefabInstance:
     - target: {fileID: 1654952326856315522, guid: a9b7988b52547e14899219ced698f6b2,
         type: 3}
       propertyPath: QuerySceneFromDevice
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1654952326856315522, guid: a9b7988b52547e14899219ced698f6b2,
         type: 3}
