@@ -83,7 +83,7 @@ public class VisualCuesManager : MonoBehaviour, IMixedRealityPointerHandler
             if (!navMeshAgentInstanceComponent.pathPending)
             {
                 straightPath = navMeshAgentInstanceComponent.path;
-                DrawStraightPath(straightPath);
+                //DrawStraightPath(straightPath);
                 WaitAndCheckIfPathCreated = false;
             }
         }
