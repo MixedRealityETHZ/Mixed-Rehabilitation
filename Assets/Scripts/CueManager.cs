@@ -21,6 +21,8 @@ public class CueManager : MonoBehaviour
     [SerializeField] private SampleMenu sampleMenu;
     [SerializeField] private GameObject welcomeMenu;
     [SerializeField] private GameObject checkCalibrationMenu;
+    [SerializeField] private GameObject correctCheckCalibration;
+    [SerializeField] private GameObject incorrectCheckCalibrationMenu;
     [SerializeField] private GameObject calibrationMenu;
     [SerializeField] private GameObject textUseTxtValues;
     [SerializeField] private TextMeshPro averageSpeedCheckMenu;
@@ -30,6 +32,7 @@ public class CueManager : MonoBehaviour
     [SerializeField] private TextMeshPro StoredStepLegthWelcomeMenu;
     private bool hasStartedCalibration = false;
     private bool isCalibrating = false;
+    private bool validCalibration = true;
 
     public bool areCuesEnabled = true;
     public bool isFreezed = true;// value not changed
@@ -85,8 +88,8 @@ public class CueManager : MonoBehaviour
         textIndicator.text = "Welcome";
         if (txtFound)
         {
-            StoredSpeedWelcomeMenu.text = "Stored walking speed: " + averageWalkingSpeed.ToString("F2") + " m/s";
-            StoredStepLegthWelcomeMenu.text = "Stored step legth: " + averageStride.ToString("F2") + " m/s";
+            StoredSpeedWelcomeMenu.text = "Stored walking speed: " + calibration.averageWalkingSpeed.ToString("F2") + " m/s";
+            StoredStepLegthWelcomeMenu.text = "Stored step legth: " + calibration.averageStride.ToString("F2") + " m/s";
         }
         else
         {
@@ -186,16 +189,27 @@ public class CueManager : MonoBehaviour
         
     }
     
-    public void CheckCalibration(bool validCalibration)
+    public void CheckCalibration(bool _validCalibration)
     {
         isCalibrating = false;
+        validCalibration = _validCalibration;
         Debug.Log("Finished calibration. Let user check if it is correct.");
+        if (_validCalibration)
+        {
+            correctCheckCalibration.SetActive(true);
+            incorrectCheckCalibrationMenu.SetActive(false);
+            averageSpeedCheckMenu.text = "Average walking speed: " + calibration.averageWalkingSpeed.ToString("F2") + " m/s";
+            averageStepLengthCheckMenu.text = "Average step length: " + calibration.averageStride.ToString("F2") + " m";
+        }
+        else
+        {
+            correctCheckCalibration.SetActive(false);
+            incorrectCheckCalibrationMenu.SetActive(true);
+        }
         checkCalibrationMenu.SetActive(true);
         calibrationMenu.SetActive(false);
         textIndicator.text = "Finished";
         circleIndicator.color = Color.white;
-        averageSpeedCheckMenu.text = "Average walking speed: " + averageWalkingSpeed.ToString("F2") + " m/s";
-        averageStepLengthCheckMenu.text = "Average step length: " + averageStride.ToString("F2") + " m";
     }
 
     public void SkipCalibration()
@@ -210,6 +224,10 @@ public class CueManager : MonoBehaviour
     }
     public void FinishedCalibration()
     {
+        if(hasStartedCalibration && !validCalibration)
+        {
+            return;
+        }
         if (!isCalibrating)
         {
             Debug.Log("Finished Calibration");

@@ -4141,6 +4141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54d40d5edb9a15d4baecb1cb37b97c2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CALIBRATION_DIR: 
   averageTimeBetweenSteps: 0
   averageStepWidth: 0
   averageStride: 0
@@ -4201,6 +4202,8 @@ MonoBehaviour:
   sampleMenu: {fileID: 1795520016}
   welcomeMenu: {fileID: 1521243024}
   checkCalibrationMenu: {fileID: 940913655}
+  correctCheckCalibration: {fileID: 558448269}
+  incorrectCheckCalibrationMenu: {fileID: 1862354325}
   calibrationMenu: {fileID: 2049609181}
   textUseTxtValues: {fileID: 1179999573}
   averageSpeedCheckMenu: {fileID: 459621190}
@@ -6616,7 +6619,7 @@ PrefabInstance:
     - target: {fileID: 1654952326856315522, guid: a9b7988b52547e14899219ced698f6b2,
         type: 3}
       propertyPath: QuerySceneFromDevice
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1654952326856315522, guid: a9b7988b52547e14899219ced698f6b2,
         type: 3}
