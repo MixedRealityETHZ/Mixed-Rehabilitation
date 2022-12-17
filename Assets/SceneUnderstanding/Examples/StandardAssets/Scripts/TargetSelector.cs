@@ -28,7 +28,7 @@ public class TargetSelector : MonoBehaviour
     public float minDistanceToHead = 2.5f;
     // Has drawn a line to the target
     bool hasDrawnLine = false;
-    
+
     [SerializeField] private VisualCuesManager visualCuesManager;
     public GameObject targetSymbol;
 
@@ -111,12 +111,12 @@ public class TargetSelector : MonoBehaviour
             sphere.transform.position = meanPosition;
             //sphere.transform.position = hitPosition;
             // Show target symbol 1 meter in front of the user
-            Vector3 targetSymbolPosition = Camera.main.transform.position + (hitPosition - Camera.main.transform.position).normalized;
+            Vector3 targetSymbolPosition = Camera.main.transform.position + 3 * (hitPosition - Camera.main.transform.position).normalized;
             targetSymbol.transform.position = targetSymbolPosition;
             // Rotate the sphere so it's prependicular to the gaze
-            targetSymbol.transform.rotation = Quaternion.LookRotation((hitPosition - Camera.main.transform.position).normalized, Vector3.up);
+            targetSymbol.transform.rotation = Quaternion.LookRotation(3 * (hitPosition - Camera.main.transform.position).normalized, Vector3.up);
         }
-    } 
+    }
     void UpdateTargetCalculation()
     {
 
@@ -150,11 +150,24 @@ public class TargetSelector : MonoBehaviour
             // Update the sphere
             //sphere.transform.position = meanPosition;
             sphere.transform.position = hitPosition;
-            // Show target symbol 2 meter in front of the user
-            Vector3 targetSymbolPosition = Camera.main.transform.position + (hitPosition - Camera.main.transform.position).normalized / 2;
-            targetSymbol.transform.position = targetSymbolPosition;
+            // Show target symbol 3 meter in front of the user
+            //if the distance between the target symbol and the camera is less than 2.5 meters
+            //then the target symbol will be placed 2.5 meters in front of the camera
+            if (Vector3.Distance(Camera.main.transform.position, hitPosition) > 3)
+            {
+                Vector3 targetSymbolPosition = Camera.main.transform.position + 3 * (hitPosition - Camera.main.transform.position).normalized;
+                targetSymbol.transform.position = targetSymbolPosition;
+                
+            }
+            else
+            {
+                targetSymbol.transform.position = hitPosition;
+
+            }
             // Rotate the sphere so it's prependicular to the gaze
-            targetSymbol.transform.rotation = Quaternion.LookRotation((hitPosition - Camera.main.transform.position).normalized, Vector3.up);
+            targetSymbol.transform.rotation = Quaternion.LookRotation(3 * (hitPosition - Camera.main.transform.position).normalized, Vector3.up);
+
+
 
 
             // Update the color
