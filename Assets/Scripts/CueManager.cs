@@ -151,7 +151,7 @@ public class CueManager : MonoBehaviour
     public void CheckCalibration()
     {
         Debug.Log("Finished calibration. Let user check if it is correct.");
-        ShowAndPlaceMenu(checkCalibrationMenu);
+        checkCalibrationMenu.SetActive(true);
         calibrationMenu.SetActive(false);
         textIndicator.text = "Finished";
         circleIndicator.color = Color.white;
@@ -188,7 +188,7 @@ public class CueManager : MonoBehaviour
             {
                 startCalibrationAction = ia;
             }
-            else if (ia.Phrase == "Start")
+            else if (ia.Phrase == "Continue")
             {
                 finishCalibrationAction = ia;
             }
