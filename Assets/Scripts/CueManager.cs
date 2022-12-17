@@ -214,10 +214,15 @@ public class CueManager : MonoBehaviour
         {
             Debug.Log("Finished Calibration");
             checkCalibrationMenu.SetActive(false);
+            
             averageStepWidth = calibration.averageStepWidth;
             averageStride = calibration.averageStride;
             averageTimeBetweenSteps = calibration.averageTimeBetweenSteps;
             averageWalkingSpeed = calibration.averageWalkingSpeed;
+
+            footprints.stepWidth = averageStepWidth;
+            footprints.stepLength = averageStride;
+            
             StartCoroutine(DelayedDisableVoiceInputs());
         }
         
