@@ -13,7 +13,7 @@ public class Calibration : MonoBehaviour
     private bool _isCalibrated = false;
     private string calibrationText = "Calibrate";
     private string filePath;
-    public const string CALIBRATION_DIR = "calibrationData";
+    public string CALIBRATION_DIR = "";
     public const string CALIBRATION_FILE_NAME = "calibration.txt";
     
     private int lastHeadPositionIndex = 0;
@@ -39,29 +39,37 @@ public class Calibration : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        CALIBRATION_DIR = Application.persistentDataPath + "/calibrationData/";
         filePath = CALIBRATION_DIR + "/" + CALIBRATION_FILE_NAME;
-        if (!Directory.Exists(CALIBRATION_DIR))
-            Directory.CreateDirectory(CALIBRATION_DIR);
-
-        if (File.Exists(filePath))
+        try
         {
-            string[] lines = File.ReadAllLines(filePath);
-            if (lines.Length > 0)
+            if (!Directory.Exists(CALIBRATION_DIR))
+                Directory.CreateDirectory(CALIBRATION_DIR);
+
+            if (File.Exists(filePath))
             {
-                string[] values = lines[0].Split(',');
-                if (values.Length == 4)
+                string[] lines = File.ReadAllLines(filePath);
+                if (lines.Length > 0)
                 {
-                    averageTimeBetweenSteps = float.Parse(values[0]);
-                    averageStepWidth = float.Parse(values[1]);
-                    averageStride = float.Parse(values[2]);
-                    averageWalkingSpeed = float.Parse(values[3]);
-                    _isCalibrated = true;
-                    calibrationText = "Calibrated";
-                    Debug.Log("Already calibrated with stride: " + averageStride + ", step width: " + averageStepWidth + "and walking speed: " + averageWalkingSpeed);
+                    string[] values = lines[0].Split(',');
+                    if (values.Length == 4)
+                    {
+                        averageTimeBetweenSteps = float.Parse(values[0]);
+                        averageStepWidth = float.Parse(values[1]);
+                        averageStride = float.Parse(values[2]);
+                        averageWalkingSpeed = float.Parse(values[3]);
+                        _isCalibrated = true;
+                        calibrationText = "Calibrated";
+                        Debug.Log("Already calibrated with stride: " + averageStride + ", step width: " + averageStepWidth + "and walking speed: " + averageWalkingSpeed);
+                    }
                 }
             }
         }
-        
+        catch (Exception e)
+        {
+            Debug.Log("Error while reading calibration file: " + e.Message);
+        }
+
         CueManager.Instance.ShowWelcomeMenu(_isCalibrated);
 
         // TestFunctions();
@@ -350,7 +358,7 @@ public class Calibration : MonoBehaviour
         // Calculate the average time between steps, the average step width and the average stride
         Calibrate();
 
-        CueManager.Instance.CheckCalibration();
+        CueManager.Instance.CheckCalibration(_isCalibrated);
     }
 
     // Update is called once per frame

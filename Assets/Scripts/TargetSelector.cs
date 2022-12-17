@@ -7,7 +7,7 @@ using static UnityEngine.GraphicsBuffer;
 public class TargetSelector : MonoBehaviour
 {
     // Display to position where the user looks at
-    GameObject sphere;
+    GameObject plane;
     MeshRenderer meshRenderer;
     Renderer renderer;
     // Array of the last 50 positions
@@ -36,13 +36,13 @@ public class TargetSelector : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        sphere = gameObject;
+        plane = gameObject;
         if (visualCuesManager == null)
         {
             visualCuesManager = GameObject.Find("PathManager").GetComponent<VisualCuesManager>();
         }
-        meshRenderer = sphere.GetComponent<MeshRenderer>();
-        renderer = sphere.GetComponent<Renderer>();
+        meshRenderer = plane.GetComponent<MeshRenderer>();
+        renderer = plane.GetComponent<Renderer>();
     }
 
     // Update is called once per frame
@@ -108,7 +108,7 @@ public class TargetSelector : MonoBehaviour
             meanPosition /= positions.Length;
 
             // Update the sphere
-            sphere.transform.position = meanPosition;
+            plane.transform.position = meanPosition;
             //sphere.transform.position = hitPosition;
             // Show target symbol 1 meter in front of the user
             Vector3 targetSymbolPosition = Camera.main.transform.position + 3 * (hitPosition - Camera.main.transform.position).normalized;
@@ -147,25 +147,28 @@ public class TargetSelector : MonoBehaviour
             }
             variance /= positions.Length;
 
-            // Update the sphere
-            //sphere.transform.position = meanPosition;
-            sphere.transform.position = hitPosition;
             // Show target symbol 3 meter in front of the user
-            //if the distance between the target symbol and the camera is less than 2.5 meters
-            //then the target symbol will be placed 2.5 meters in front of the camera
+            // if the distance between the target symbol and the camera is less than 2.5 meters
+            // then the target symbol will be placed 2.5 meters in front of the camera
+            Vector3 gazeDirection = (hitPosition - Camera.main.transform.position).normalized;
             if (Vector3.Distance(Camera.main.transform.position, hitPosition) > 3)
             {
-                Vector3 targetSymbolPosition = Camera.main.transform.position + 3 * (hitPosition - Camera.main.transform.position).normalized;
+                Vector3 targetSymbolPosition = Camera.main.transform.position + 3 * gazeDirection;
                 targetSymbol.transform.position = targetSymbolPosition;
-                
+                plane.transform.position = targetSymbolPosition + 0.1f * gazeDirection;
             }
             else
             {
-                targetSymbol.transform.position = hitPosition;
-
+                targetSymbol.transform.position = hitPosition - 0.1f * gazeDirection;
+                plane.transform.position = hitPosition - 0.05f * gazeDirection;
             }
-            // Rotate the sphere so it's prependicular to the gaze
-            targetSymbol.transform.rotation = Quaternion.LookRotation(3 * (hitPosition - Camera.main.transform.position).normalized, Vector3.up);
+            // Rotate target symbol so it's prependicular to the gaze
+            targetSymbol.transform.rotation = Quaternion.LookRotation(3 * gazeDirection, Vector3.up);
+            // Rotate tge plane so it's prependicular to the gaze
+            // The normal of the target symbol was in z-axis, but the normal of the plane is in y-axis
+            // Therefore, the plane needs to be rotated 90 degrees around the x-axis
+            plane.transform.rotation = Quaternion.LookRotation(3 * gazeDirection, Vector3.up) * Quaternion.Euler(-90, 0, 0);
+
 
 
 
@@ -176,7 +179,7 @@ public class TargetSelector : MonoBehaviour
                 timeSinceSmallVariance += Time.deltaTime;
                 if (timeSinceSmallVariance > minTimeToConfirm && (meanPosition - Camera.main.transform.position).magnitude > minDistanceToHead)
                 {
-                    renderer.material.color = Color.blue;
+                    renderer.material.color = new Color(0, 0, 1, 0.5f);
                     if (!hasDrawnLine)
                     {
                         visualCuesManager.NewPoint(meanPosition);
@@ -185,14 +188,14 @@ public class TargetSelector : MonoBehaviour
                 }
                 else
                 {
-                    renderer.material.color = Color.yellow;
+                    renderer.material.color = new Color(1, 1, 0, 0.5f);
                 }
             }
             else
             {
                 timeSinceSmallVariance = 0;
                 hasDrawnLine = false;
-                sphere.GetComponent<Renderer>().material.color = Color.red;
+                renderer.material.color = new Color(1, 0, 0, 0.5f);
             }
             /*// Check if eye gaze is available
             if (!CoreServices.InputSystem.EyeGazeProvider.IsEyeTrackingDataValid)
@@ -225,12 +228,12 @@ public class TargetSelector : MonoBehaviour
     public void ShowTargetCrossAndSphere()
     {
         targetSymbol.SetActive(true);
-        sphere.SetActive(true);
+        plane.SetActive(true);
     }
 
     public void HideTargetCrossAndSphere()
     {
         targetSymbol.SetActive(false);
-        sphere.SetActive(false);
+        plane.SetActive(false);
     }
 }

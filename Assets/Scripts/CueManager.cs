@@ -62,7 +62,7 @@ public class CueManager : MonoBehaviour
         checkCalibrationMenu.SetActive(false);
         disableCues();
         textIndicator.text = "Loading";
-        DisableDisplayingSceneRoom();
+        sceneUnderstandingManager.mixedRehabilittion_DisplayMeshes = false;
         circleIndicator.color = Color.white;
     }
     public void ShowWelcomeMenu(bool txtFound)
@@ -164,7 +164,7 @@ public class CueManager : MonoBehaviour
         
     }
     
-    public void CheckCalibration()
+    public void CheckCalibration(bool validCalibration)
     {
         isCalibrating = false;
         Debug.Log("Finished calibration. Let user check if it is correct.");
