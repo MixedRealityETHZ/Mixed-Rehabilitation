@@ -21,6 +21,7 @@ public class CueManager : MonoBehaviour
     [SerializeField] private GameObject welcomeMenu;
     [SerializeField] private GameObject checkCalibrationMenu;
     [SerializeField] private GameObject calibrationMenu;
+    [SerializeField] private GameObject textUseTxtValues;
 
     public bool areCuesEnabled = true;
     public bool isFreezed = true;// value not changed
@@ -58,10 +59,20 @@ public class CueManager : MonoBehaviour
         sampleMenu.Hide();
         checkCalibrationMenu.SetActive(false);
         disableCues();
-        textIndicator.text = "Welcome";
+        textIndicator.text = "Loading";
         DisableDisplayingSceneRoom();
         circleIndicator.color = Color.white;
     }
+    public void ShowWelcomeMenu(bool txtFound)
+    {
+        textIndicator.text = "Welcome";
+        if (!txtFound)
+        {
+            textUseTxtValues.SetActive(false);
+        }
+        ShowAndPlaceMenu(welcomeMenu);
+    }
+
     public void NewPointHeadTraking(Vector3 target)
     {
         visualCuesManager.NewPoint(target);
@@ -158,6 +169,7 @@ public class CueManager : MonoBehaviour
     }
     public void FinishedCalibration()
     {
+
         checkCalibrationMenu.SetActive(false);
         averageStepWidth = calibration.averageStepWidth;
         averageStride = calibration.averageStride;
