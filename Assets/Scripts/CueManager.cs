@@ -59,6 +59,7 @@ public class CueManager : MonoBehaviour
         checkCalibrationMenu.SetActive(false);
         disableCues();
         textIndicator.text = "Welcome";
+        DisableDisplayingSceneRoom();
         circleIndicator.color = Color.white;
     }
     public void NewPointHeadTraking(Vector3 target)
