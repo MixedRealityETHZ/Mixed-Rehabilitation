@@ -3568,9 +3568,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54d40d5edb9a15d4baecb1cb37b97c2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  averageStride: 0
-  averageStepWidth: 0
   averageTimeBetweenSteps: 0
+  averageStepWidth: 0
+  averageStride: 0
   averageWalkingSpeed: 1.25
 --- !u!4 &694116181
 Transform:

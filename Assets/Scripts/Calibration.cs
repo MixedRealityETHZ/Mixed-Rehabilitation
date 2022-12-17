@@ -23,9 +23,9 @@ public class Calibration : MonoBehaviour
     private Vector3[] movingAverageHeadPositions = new Vector3[sampleSize];
     private float[] times = new float[sampleSize + movingAverageWindowSize - 1];
 
-    public float averageStride = 0.0f;
-    public float averageStepWidth = 0.0f;
     public float averageTimeBetweenSteps = 0.0f;
+    public float averageStepWidth = 0.0f;
+    public float averageStride = 0.0f;
     public float averageWalkingSpeed = 1.25f;
 
     // Start is called before the first frame update
@@ -183,12 +183,12 @@ public class Calibration : MonoBehaviour
         }
 
         // Also remove first and last value from both lists
-        if (localMaximaIndices.Count > 0)
+        if (localMaximaIndices.Count > 1)
         {
             localMaximaIndices.RemoveAt(0);
             localMaximaIndices.RemoveAt(localMaximaIndices.Count - 1);
         }
-        if (localMinimaIndices.Count > 0)
+        if (localMinimaIndices.Count > 1)
         {
             localMinimaIndices.RemoveAt(0);
             localMinimaIndices.RemoveAt(localMinimaIndices.Count - 1);
@@ -282,6 +282,22 @@ public class Calibration : MonoBehaviour
             }
             averageStride /= localMaximaIndices.Count - 2;
 
+            // Calculate the average walking speed
+            float totalDistanceWalked = 0.0f;
+            float totalTime = 0.0f;
+            for (int i = 0; i < localMaximaIndices.Count - 1; i++)
+            {
+                Vector3 current = lastHeadPositions[localMaximaIndices[i]];
+                Vector3 next = lastHeadPositions[localMaximaIndices[i + 1]];
+
+                float distance = (new Vector2(current.x, current.z) - new Vector2(next.x, next.z)).magnitude;
+                float time = times[localMaximaIndices[i + 1]] - times[localMaximaIndices[i]];
+
+                totalDistanceWalked += distance;
+                totalTime += time;
+            }
+            averageWalkingSpeed = totalDistanceWalked / totalTime;
+
             // Save the calibration data
             string calibrationData = averageTimeBetweenSteps + "," + averageStepWidth + "," + averageStride;
             System.IO.File.WriteAllText(filePath, calibrationData);
@@ -310,6 +326,7 @@ public class Calibration : MonoBehaviour
         averageTimeBetweenSteps = 0.0f;
         averageStepWidth = 0.0f;
         averageStride = 0.0f;
+        averageWalkingSpeed = 0.0f;
 
         // Reset the calibration text
         calibrationText = "Calibrating...";
