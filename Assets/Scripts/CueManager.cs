@@ -23,6 +23,8 @@ public class CueManager : MonoBehaviour
     [SerializeField] private GameObject checkCalibrationMenu;
     [SerializeField] private GameObject calibrationMenu;
     [SerializeField] private GameObject textUseTxtValues;
+    private bool hasStartedCalibration = false;
+    private bool isCalibrating = false;
 
     public bool areCuesEnabled = true;
     public bool isFreezed = true;// value not changed
@@ -147,33 +149,53 @@ public class CueManager : MonoBehaviour
     }
     public void StartCalibration()
     {
-        checkCalibrationMenu.SetActive(false);
-        calibrationMenu.SetActive(true);
-        Debug.Log(" StartCalibration ");
-        welcomeMenu.SetActive(false);
-        //Call calibration();
-        textIndicator.text = "Calibrating";
-        circleIndicator.color = Color.green;
-        StartCoroutine(calibration.CalibrateCoroutine());
+        if (!isCalibrating)
+        {
+            checkCalibrationMenu.SetActive(false);
+            calibrationMenu.SetActive(true);
+            Debug.Log(" StartCalibration ");
+            welcomeMenu.SetActive(false);
+            //Call calibration();
+            textIndicator.text = "Calibrating";
+            circleIndicator.color = Color.green;
+            StartCoroutine(calibration.CalibrateCoroutine());
+            hasStartedCalibration = true;
+            isCalibrating = true;
+        }
+        
     }
     
     public void CheckCalibration()
     {
+        isCalibrating = false;
         Debug.Log("Finished calibration. Let user check if it is correct.");
         checkCalibrationMenu.SetActive(true);
         calibrationMenu.SetActive(false);
         textIndicator.text = "Finished";
         circleIndicator.color = Color.white;
     }
+
+    public void SkipCalibration()
+    {
+        
+        if (!hasStartedCalibration)
+        {
+            Debug.Log("Skip calibration");
+            FinishedCalibration();
+        }
+    }
     public void FinishedCalibration()
     {
-
-        checkCalibrationMenu.SetActive(false);
-        averageStepWidth = calibration.averageStepWidth;
-        averageStride = calibration.averageStride;
-        averageTimeBetweenSteps = calibration.averageTimeBetweenSteps;
-        averageWalkingSpeed = calibration.averageWalkingSpeed;
-        StartCoroutine(DelayedDisableVoiceInputs());
+        if (!isCalibrating)
+        {
+            Debug.Log("Finished Calibration");
+            checkCalibrationMenu.SetActive(false);
+            averageStepWidth = calibration.averageStepWidth;
+            averageStride = calibration.averageStride;
+            averageTimeBetweenSteps = calibration.averageTimeBetweenSteps;
+            averageWalkingSpeed = calibration.averageWalkingSpeed;
+            StartCoroutine(DelayedDisableVoiceInputs());
+        }
         
     }
 
@@ -189,8 +211,9 @@ public class CueManager : MonoBehaviour
     {
         yield return new WaitForSeconds(0.2f);
         InputAction startCalibrationAction = new InputAction();
-        InputAction finishCalibrationAction = new InputAction();
-        
+        InputAction skipAction = new InputAction();
+        InputAction continueAction = new InputAction();
+
         //remove Calibration inputs
         foreach (InputAction ia in sampleMenu.suInput.inputActions)
         {
@@ -198,18 +221,26 @@ public class CueManager : MonoBehaviour
             {
                 startCalibrationAction = ia;
             }
+            else if (ia.Phrase == "Skip")
+            {
+                skipAction = ia;
+            }
             else if (ia.Phrase == "Continue")
             {
-                finishCalibrationAction = ia;
+                continueAction = ia;
             }
         }
         if (startCalibrationAction != null)
         {
             sampleMenu.suInput.inputActions.Remove(startCalibrationAction);
         }
-        if (finishCalibrationAction != null)
+        if (skipAction != null)
         {
-            sampleMenu.suInput.inputActions.Remove(finishCalibrationAction);
+            sampleMenu.suInput.inputActions.Remove(skipAction);
+        }
+        if (continueAction != null)
+        {
+            sampleMenu.suInput.inputActions.Remove(continueAction);
         }
         //Add Help, Close, On, Off, Show, Hide inputs
         sampleMenu.suInput.inputActions.Add(InputAction.Create("On", KeyCode.N, "Enable cues", enableCues));
