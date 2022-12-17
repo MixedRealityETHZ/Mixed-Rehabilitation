@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Microsoft.MixedReality.SceneUnderstanding.Samples.Unity;
 using TMPro;
+using UnityEditor;
 
 public class CueManager : MonoBehaviour
 {
@@ -55,7 +56,7 @@ public class CueManager : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        ShowAndPlaceMenu(welcomeMenu);
+        
         sampleMenu.Hide();
         checkCalibrationMenu.SetActive(false);
         disableCues();
@@ -70,7 +71,11 @@ public class CueManager : MonoBehaviour
         {
             textUseTxtValues.SetActive(false);
         }
-        ShowAndPlaceMenu(welcomeMenu);
+        welcomeMenu.SetActive(true);
+        //Move the  menu to the correct position
+        welcomeMenu.transform.position = Camera.main.transform.position + (Camera.main.transform.forward * 0.75f);
+        //Visuals foward vector is reversed, do a look from Camera to visuals to fix it.
+        welcomeMenu.transform.rotation = Quaternion.LookRotation(welcomeMenu.transform.position - Camera.main.transform.position);
     }
 
     public void NewPointHeadTraking(Vector3 target)
@@ -78,14 +83,7 @@ public class CueManager : MonoBehaviour
         visualCuesManager.NewPoint(target);
     }
     
-    public void ShowAndPlaceMenu(GameObject menu)
-    {
-        menu.SetActive(true);
-        //Move the  menu to the correct position
-        menu.transform.position = Camera.main.transform.position + (Camera.main.transform.forward * 0.75f);
-        //Visuals foward vector is reversed, do a look from Camera to visuals to fix it.
-        menu.transform.rotation = Quaternion.LookRotation(menu.transform.position - Camera.main.transform.position);
-    }
+    
     public void enableCues()
     {
         areCuesEnabled = true;
