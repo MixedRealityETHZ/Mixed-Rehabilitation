@@ -4210,6 +4210,7 @@ MonoBehaviour:
   averageStepLengthCheckMenu: {fileID: 1667972605}
   StoredSpeedWelcomeMenu: {fileID: 217345282}
   StoredStepLegthWelcomeMenu: {fileID: 2107447821}
+  calibrationCountdownText: {fileID: 858717224}
   areCuesEnabled: 1
   isFreezed: 1
   averageTimeBetweenSteps: 5

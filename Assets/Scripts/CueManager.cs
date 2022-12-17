@@ -30,9 +30,12 @@ public class CueManager : MonoBehaviour
 
     [SerializeField] private TextMeshPro StoredSpeedWelcomeMenu;
     [SerializeField] private TextMeshPro StoredStepLegthWelcomeMenu;
+
+    [SerializeField] private TextMeshPro calibrationCountdownText;
     private bool hasStartedCalibration = false;
     private bool isCalibrating = false;
     private bool validCalibration = true;
+    private int secondsCountDown = 10;
 
     public bool areCuesEnabled = true;
     public bool isFreezed = true;// value not changed
@@ -183,13 +186,29 @@ public class CueManager : MonoBehaviour
             textIndicator.text = "Calibrating";
             circleIndicator.color = Color.green;
             StartCoroutine(calibration.CalibrateCoroutine());
+            StartCoroutine(Chronometer10());
             hasStartedCalibration = true;
             isCalibrating = true;
         }
         
     }
     
-    public void CheckCalibration(bool _validCalibration)
+    public IEnumerator Chronometer10()
+    {
+        if (secondsCountDown>=0)
+        {
+            calibrationCountdownText.text = secondsCountDown.ToString();
+            yield return new WaitForSeconds(1);
+            secondsCountDown--;
+            StartCoroutine(Chronometer10());
+        }
+        else
+        {
+            secondsCountDown = 10;
+            StopCoroutine(Chronometer10());
+        }
+    }
+        public void CheckCalibration(bool _validCalibration)
     {
         isCalibrating = false;
         validCalibration = _validCalibration;
