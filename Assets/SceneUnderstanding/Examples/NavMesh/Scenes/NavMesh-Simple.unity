@@ -867,7 +867,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Welcome to Gait Freeing Rehabilitation App!
+  m_text: Welcome to Gait Freezing Rehabilitation App!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4481,7 +4481,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'If you have already gone through a callibration before and you want to
+  m_text: 'If you have already gone through a calibration before and you want to
     use the last values recorded, please say: "Skip"'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5686,9 +5686,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "This app aims to help you overcome freezing gait episodes. \n\n\nFirst
-    of all, you will go through a small callibration to mesure your average step
-    legth and average speed. You will need to walk straight without stopping during
-    10 seconds."
+    of all, you will go through a small calibration phase to measure your average
+    step length and average speed. You will need to walk straight without stopping
+    during 10 seconds."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -6373,7 +6373,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: When you are ready to start the calibration, please say "Callibrate".
+  m_text: When you are ready to start the calibration, please say "Calibrate".
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
