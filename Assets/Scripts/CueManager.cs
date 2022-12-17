@@ -58,7 +58,6 @@ public class CueManager : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        
         sampleMenu.Hide();
         checkCalibrationMenu.SetActive(false);
         disableCues();

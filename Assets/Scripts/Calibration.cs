@@ -10,7 +10,7 @@ using UnityEngine;
 /// </summary>
 public class Calibration : MonoBehaviour
 {
-    private bool isCalibrated = false;
+    private bool _isCalibrated = false;
     private string calibrationText = "Calibrate";
     private string filePath;
     public const string CALIBRATION_DIR = "calibrationData";
@@ -28,13 +28,20 @@ public class Calibration : MonoBehaviour
     public float averageStride = 0.0f;
     public float averageWalkingSpeed = 1.25f;
 
+    public bool isCalibrated
+    {
+        get
+        {
+            return _isCalibrated;
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         filePath = CALIBRATION_DIR + "/" + CALIBRATION_FILE_NAME;
         if (!Directory.Exists(CALIBRATION_DIR))
             Directory.CreateDirectory(CALIBRATION_DIR);
-        Debug.Log(filePath);
 
         if (File.Exists(filePath))
         {
@@ -42,17 +49,20 @@ public class Calibration : MonoBehaviour
             if (lines.Length > 0)
             {
                 string[] values = lines[0].Split(',');
-                if (values.Length == 3)
+                if (values.Length == 4)
                 {
                     averageTimeBetweenSteps = float.Parse(values[0]);
                     averageStepWidth = float.Parse(values[1]);
                     averageStride = float.Parse(values[2]);
-                    isCalibrated = true;
+                    averageWalkingSpeed = float.Parse(values[3]);
+                    _isCalibrated = true;
                     calibrationText = "Calibrated";
-                    Debug.Log("Already calibrated with stride: " + averageStride + " and step width: " + averageStepWidth);                    
+                    Debug.Log("Already calibrated with stride: " + averageStride + ", step width: " + averageStepWidth + "and walking speed: " + averageWalkingSpeed);
                 }
             }
         }
+        
+        CueManager.Instance.ShowWelcomeMenu(_isCalibrated);
 
         // TestFunctions();
 
@@ -201,8 +211,8 @@ public class Calibration : MonoBehaviour
     /// <summary>
     /// Calibrates the headset by calculating the average of the last 10 seconds of head movement
     /// </summary>
-    /// <returns>Average stride and average step width</returns>
-    (float stride, float width) Calibrate()
+    /// <returns>Average stride, average step width and average walking speed</returns>
+    (float stride, float width, float velocity) Calibrate()
     {
         /* We want to track the head height of the user. If the user is not calibrated, we want to show a button to calibrate the user.
         * We use the head height to calculate the stride and the step width. When the height is at a local maximum, we know that the user's
@@ -299,7 +309,7 @@ public class Calibration : MonoBehaviour
             averageWalkingSpeed = totalDistanceWalked / totalTime;
 
             // Save the calibration data
-            string calibrationData = averageTimeBetweenSteps + "," + averageStepWidth + "," + averageStride;
+            string calibrationData = averageTimeBetweenSteps + "," + averageStepWidth + "," + averageStride + "," + averageWalkingSpeed;
             System.IO.File.WriteAllText(filePath, calibrationData);
 
             // Set the calibration text
@@ -307,13 +317,13 @@ public class Calibration : MonoBehaviour
             Debug.Log(calibrationText);
             
             // Set the isCalibrated variable to true
-            isCalibrated = true;
+            _isCalibrated = true;
 
-            return (averageStride, averageStepWidth);
+            return (averageStride, averageStepWidth, averageWalkingSpeed);
         } else
         {
             Debug.Log("Not enough local maxima and minima. Local maxima: " + localMaximaIndices.Count + ", local minima: " + localMinimaIndices.Count);
-            return (0, 0);
+            return (0, 0, 0);
         }
     }
 
@@ -332,7 +342,7 @@ public class Calibration : MonoBehaviour
         calibrationText = "Calibrating...";
 
         // Reset the isCalibrated variable
-        isCalibrated = false;
+        _isCalibrated = false;
         
         // Wait for the user to walk for a few seconds
         yield return new WaitForSeconds(10.0f);
