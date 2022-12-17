@@ -51,7 +51,7 @@ public class Calibration : MonoBehaviour
                 string[] lines = File.ReadAllLines(filePath);
                 if (lines.Length > 0)
                 {
-                    string[] values = lines[0].Split(',');
+                    string[] values = lines[0].Split(';');
                     if (values.Length == 4)
                     {
                         averageTimeBetweenSteps = float.Parse(values[0]);
@@ -317,7 +317,7 @@ public class Calibration : MonoBehaviour
             averageWalkingSpeed = totalDistanceWalked / totalTime;
 
             // Save the calibration data
-            string calibrationData = averageTimeBetweenSteps + "," + averageStepWidth + "," + averageStride + "," + averageWalkingSpeed;
+            string calibrationData = averageTimeBetweenSteps + ";" + averageStepWidth + ";" + averageStride + ";" + averageWalkingSpeed;
             System.IO.File.WriteAllText(filePath, calibrationData);
 
             // Set the calibration text

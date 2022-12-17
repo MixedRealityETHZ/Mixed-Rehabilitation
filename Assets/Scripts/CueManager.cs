@@ -23,6 +23,11 @@ public class CueManager : MonoBehaviour
     [SerializeField] private GameObject checkCalibrationMenu;
     [SerializeField] private GameObject calibrationMenu;
     [SerializeField] private GameObject textUseTxtValues;
+    [SerializeField] private TextMeshPro averageSpeedCheckMenu;
+    [SerializeField] private TextMeshPro averageStepLengthCheckMenu;
+
+    [SerializeField] private TextMeshPro StoredSpeedWelcomeMenu;
+    [SerializeField] private TextMeshPro StoredStepLegthWelcomeMenu;
     private bool hasStartedCalibration = false;
     private bool isCalibrating = false;
 
@@ -53,22 +58,37 @@ public class CueManager : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+    
+        
     }
-
-    // Start is called before the first frame update
     private void Start()
     {
         sampleMenu.Hide();
         checkCalibrationMenu.SetActive(false);
         disableCues();
-        textIndicator.text = "Loading";
         sceneUnderstandingManager.mixedRehabilittion_DisplayMeshes = false;
         circleIndicator.color = Color.white;
     }
-    public void ShowWelcomeMenu(bool txtFound)
+
+    public  void ShowWelcomeMenu(bool txtFound)
     {
+        StartCoroutine(DelayedShowWelcomeMenu(txtFound));
+    }
+
+
+
+    IEnumerator DelayedShowWelcomeMenu(bool txtFound)
+    {
+        yield return new WaitForSeconds(0.1f);
+
+        Debug.Log("The txt was found: " + txtFound);
         textIndicator.text = "Welcome";
-        if (!txtFound)
+        if (txtFound)
+        {
+            StoredSpeedWelcomeMenu.text = "Stored walking speed: " + averageWalkingSpeed.ToString("F2") + " m/s";
+            StoredStepLegthWelcomeMenu.text = "Stored step legth: " + averageStride.ToString("F2") + " m/s";
+        }
+        else
         {
             textUseTxtValues.SetActive(false);
         }
@@ -77,6 +97,8 @@ public class CueManager : MonoBehaviour
         welcomeMenu.transform.position = Camera.main.transform.position + (Camera.main.transform.forward * 0.75f);
         //Visuals foward vector is reversed, do a look from Camera to visuals to fix it.
         welcomeMenu.transform.rotation = Quaternion.LookRotation(welcomeMenu.transform.position - Camera.main.transform.position);
+
+
     }
 
     public void NewPointHeadTraking(Vector3 target)
@@ -172,6 +194,8 @@ public class CueManager : MonoBehaviour
         calibrationMenu.SetActive(false);
         textIndicator.text = "Finished";
         circleIndicator.color = Color.white;
+        averageSpeedCheckMenu.text = "Average walking speed: " + averageWalkingSpeed.ToString("F2") + " m/s";
+        averageStepLengthCheckMenu.text = "Average step length: " + averageStride.ToString("F2") + " m";
     }
 
     public void SkipCalibration()
@@ -180,6 +204,7 @@ public class CueManager : MonoBehaviour
         if (!hasStartedCalibration)
         {
             Debug.Log("Skip calibration");
+            welcomeMenu.SetActive(false);
             FinishedCalibration();
         }
     }
