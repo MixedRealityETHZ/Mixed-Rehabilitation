@@ -92,7 +92,7 @@ public class Footprints : MonoBehaviour
             }
 
             // PRINT FOOTPRINTS If the player has moved at least 0.5 units (estimated step size) since the last frame, create a new footprint.
-            if (Vector3.Distance(currentPosition, lastPositionFootprint) > stepLength && CueManager.Instance.areCuesEnabled)
+            if (Vector3.Distance(currentPosition, lastPositionFootprint) > stepLength*0.8 && CueManager.Instance.areCuesEnabled)
             {
                 GameObject footprint = null;    
                 // Create a new footprint.

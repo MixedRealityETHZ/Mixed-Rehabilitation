@@ -23,7 +23,7 @@ public class TargetSelector : MonoBehaviour
     // Minimum time to confirm a target
     public float minTimeToConfirm = 2;
     // User is looking at a target if the variance is below this value
-    public float maxVarianceToConfirm = 0.2f;
+    public float maxVarianceToConfirm = 0.4f;
     // Prevent updating target if it's too close to the head
     public float minDistanceToHead = 2.5f;
     // Has drawn a line to the target

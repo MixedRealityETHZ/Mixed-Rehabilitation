@@ -46,7 +46,7 @@ public class CueManager : MonoBehaviour
     public float averageWalkingSpeed = 2f;
 
     public bool targetAutomaticSelection = true;
-    private bool firstLoadFinished = true;
+    private bool firstLoadFinished ;
     private bool hasFinishedSearch = false;
 
     private static CueManager m_instance;
@@ -72,6 +72,7 @@ public class CueManager : MonoBehaviour
     }
     private void Start()
     {
+        firstLoadFinished = true;
         sampleMenu.Hide();
         checkCalibrationMenu.SetActive(false);
         disableCues();
@@ -80,35 +81,33 @@ public class CueManager : MonoBehaviour
     }
     public void FinishedTxtSearch(bool txtFound)
     {
+        Debug.Log("FinishedTxtSearch");
+        Debug.Log("The txt was found: " + txtFound);
         hasFinishedSearch = true;
         hasFoundTxt = txtFound;
-        if (firstLoadFinished)
-        {
-            StartCoroutine(DelayedShowWelcomeMenu(hasFoundTxt));
-        }
+        
+        StartCoroutine(DelayedShowWelcomeMenu(hasFoundTxt));
+        
     }
     
     public void firstOnLoadFinished()
     {
+        Debug.Log("Finish on load");
         if (firstLoadFinished)
         {
             Debug.Log("firstOnLoadFinished");
             DisableDisplayingSceneRoom();
             firstLoadFinished = false;
 
-            if (hasFinishedSearch)
-            {
-                StartCoroutine(DelayedShowWelcomeMenu(hasFoundTxt));
-
-            }
+           
         }
     }
 
     IEnumerator DelayedShowWelcomeMenu(bool txtFound)
     {
         yield return new WaitForSeconds(0.1f);
+        Debug.Log("Show welcome menu");
 
-        Debug.Log("The txt was found: " + txtFound);
         textIndicator.text = "Welcome";
         if (txtFound)
         {
