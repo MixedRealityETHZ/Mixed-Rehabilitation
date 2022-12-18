@@ -1986,7 +1986,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Please, walk during 10 seconds and don''t make pauses:'
+  m_text: 'Please, walk during 10 seconds:'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3458,8 +3458,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'If you didn''t freeze during the calibration  and you didn''t make any
-    pauses you can now say :'
+  m_text: 'If you didn''t freeze during the calibration you can now say :'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -6376,8 +6375,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: "This app aims to help you overcome freezing gait episodes. \n\n\nFirst
     of all, you will go through a small calibration phase to measure your average
-    step length and average speed. You will need to walk without stopping during
-    10 seconds."
+    step length and average speed. You will need to walk during 10 seconds."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

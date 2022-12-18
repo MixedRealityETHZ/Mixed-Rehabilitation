@@ -83,7 +83,7 @@ public class Footprints : MonoBehaviour
             }
             // PRINT LINE
             // If the player has moved more than 0.05 units since the last update add a new point to the linerenderer.
-            if (Vector3.Distance(currentPosition, lastPositionLine) > 0.1f && CueManager.Instance.areCuesEnabled)
+            if (Vector3.Distance(currentPosition, lastPositionLine) > 0.2f && CueManager.Instance.areCuesEnabled)
             {
                 // Add a new point to the linerenderer.
                 lineRenderer.positionCount++;
