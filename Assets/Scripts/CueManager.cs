@@ -35,6 +35,7 @@ public class CueManager : MonoBehaviour
     private bool hasStartedCalibration = false;
     private bool isCalibrating = false;
     private bool validCalibration = true;
+    private bool hasFoundTxt = false;
     private int secondsCountDown = 10;
 
     public bool areCuesEnabled = true;
@@ -78,6 +79,7 @@ public class CueManager : MonoBehaviour
 
     public  void ShowWelcomeMenu(bool txtFound)
     {
+        hasFoundTxt = txtFound;
         StartCoroutine(DelayedShowWelcomeMenu(txtFound));
     }
 
@@ -208,7 +210,7 @@ public class CueManager : MonoBehaviour
             StopCoroutine(Chronometer10());
         }
     }
-        public void CheckCalibration(bool _validCalibration)
+    public void CheckCalibration(bool _validCalibration)
     {
         isCalibrating = false;
         validCalibration = _validCalibration;
@@ -238,6 +240,13 @@ public class CueManager : MonoBehaviour
         {
             Debug.Log("Skip calibration");
             welcomeMenu.SetActive(false);
+            FinishedCalibration();
+        }
+    }
+    public void ContinueVoiceInput() 
+    {
+        if (hasStartedCalibration)
+        {
             FinishedCalibration();
         }
     }
@@ -324,5 +333,11 @@ public class CueManager : MonoBehaviour
         Debug.Log("continue");
         CueManager.Instance.enableCues();
 
+    }
+
+    public void firstOnLoadFinished()
+    {
+        DisableDisplayingSceneRoom();
+        sceneUnderstandingManager.OnLoadFinished.RemoveListener(firstOnLoadFinished);
     }
 }

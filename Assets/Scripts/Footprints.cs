@@ -87,6 +87,7 @@ public class Footprints : MonoBehaviour
             {
                 // Add a new point to the linerenderer.
                 lineRenderer.positionCount++;
+                currentPosition.y = currentPosition.y - 0.0002f;
                 lineRenderer.SetPosition(lineRenderer.positionCount - 1, currentPosition);
 
                 // Set the last position to the current position.
@@ -108,7 +109,7 @@ public class Footprints : MonoBehaviour
                 }
 
                 // Set the footprint's position to the player's current position, but with a y offset of -0.5.
-                footprint.transform.position = new Vector3(currentPosition.x, currentPosition.y + 0.0001f, currentPosition.z);
+                footprint.transform.position = new Vector3(currentPosition.x, currentPosition.y - 0.0001f, currentPosition.z);
 
                 // Alternate between having the footprint be 0.5f to the left or right of the player's trajectory.
                 
