@@ -23,6 +23,7 @@ public class Footprints : MonoBehaviour
     
     // Left Footprint prefab
     public GameObject leftFootprintPrefab;
+    public FreezingDetector freezingDetector;
 
     // The list of footprints.
     private List<GameObject> footprints;
@@ -69,11 +70,7 @@ public class Footprints : MonoBehaviour
         if (player != null && isPlayerCreated && player.transform.position != Camera.main.transform.position)
         {
             //if user deviates from the line renderer 0.5m call newPoint()
-            
-            
-            
-            
-
+          
             // Get the player's current position.
             currentPosition = player.transform.position;
             if (isFirstFootprint)
@@ -116,17 +113,18 @@ public class Footprints : MonoBehaviour
                 Vector3 trajectory = currentPosition - lastPositionFootprint;
                 float angle = Mathf.Atan2(trajectory.z, trajectory.x);// * Mathf.Rad2Deg;
 
-            
-
+                Debug.Log(stepWidth);
+                float currentStepWidth = stepWidth*30f - freezingDetector.currentWalkingSpeed*0.05f;
+                Debug.Log(currentStepWidth);
 
                 if (leftFoot)
                 {
-                    footprint.transform.position += new Vector3(-(stepWidth/2)*Mathf.Sin(angle), 0, (stepWidth / 2) * Mathf.Cos(angle));
+                    footprint.transform.position += new Vector3(-(stepWidth/2)*Mathf.Sin(angle), 0, (currentStepWidth / 2) * Mathf.Cos(angle));
                     //footprint.transform.position += new Vector3(trajectory.z, 0, -trajectory.x) * 0.1f;
                 }
                 else
                 {
-                    footprint.transform.position += new Vector3((stepWidth / 2) * Mathf.Sin(angle), 0, -(stepWidth / 2) * Mathf.Cos(angle));
+                    footprint.transform.position += new Vector3((stepWidth / 2) * Mathf.Sin(angle), 0, -(currentStepWidth / 2) * Mathf.Cos(angle));
                     //footprint.transform.position += new Vector3(-trajectory.z, 0, trajectory.x) * 0.1f;
                 }
                 leftFoot = !leftFoot;

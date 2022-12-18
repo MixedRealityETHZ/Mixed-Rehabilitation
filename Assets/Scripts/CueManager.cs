@@ -328,11 +328,15 @@ public class CueManager : MonoBehaviour
 
         //update the inputs
         sampleMenu.suInput.EnableInput();
+        StartCoroutine(delayedTurnOnCues());
         //show the menu of the voice commnds
         sampleMenu.Show();
-        Debug.Log("continue");
+    }
+    IEnumerator delayedTurnOnCues()
+    {
+        yield return new WaitForSeconds(5f);
+        
         CueManager.Instance.enableCues();
-
     }
 
     public void firstOnLoadFinished()
