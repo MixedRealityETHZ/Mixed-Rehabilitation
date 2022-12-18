@@ -226,7 +226,7 @@ namespace Microsoft.MixedReality.SceneUnderstanding.Samples.Unity
 
         private async void Start()
         {
-            mixedRehabilittion_DisplayMeshes = true;
+            mixedRehabilittion_DisplayMeshes = false;
             SceneRoot = SceneRoot == null ? new GameObject("Scene Root") : SceneRoot;
 
             // Considering that device is currently not supported in the editor means that

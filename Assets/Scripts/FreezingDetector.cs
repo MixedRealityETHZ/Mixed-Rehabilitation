@@ -45,7 +45,7 @@ public class FreezingDetector : MonoBehaviour
         }
         currentWalkingSpeed = distance / time;
 
-        if (currentWalkingSpeed < 0.3 * averageWalkingSpeed) // instead of `0.3 * averageWalkingSpeed`, use something like `averageWalkingSpeed - x * stdDev` in the future
+        if (currentWalkingSpeed < 0.5 * averageWalkingSpeed) // instead of `0.3 * averageWalkingSpeed`, use something like `averageWalkingSpeed - x * stdDev` in the future
         {
             isFreezing = true;
             CueManager.Instance.UserHasFreezed();
