@@ -179,7 +179,7 @@ public class TargetSelector : MonoBehaviour
                 timeSinceSmallVariance += Time.deltaTime;
                 if (timeSinceSmallVariance > minTimeToConfirm && (meanPosition - Camera.main.transform.position).magnitude > minDistanceToHead)
                 {
-                    renderer.material.color = new Color(0, 0, 1, 0.5f);
+                    renderer.material.color = new Color(0, 0, 1, 0.3f);
                     if (!hasDrawnLine)
                     {
                         visualCuesManager.NewPoint(meanPosition);
@@ -188,14 +188,14 @@ public class TargetSelector : MonoBehaviour
                 }
                 else
                 {
-                    renderer.material.color = new Color(1, 1, 0, 0.5f);
+                    renderer.material.color = new Color(1, 1, 0, 0.3f);
                 }
             }
             else
             {
                 timeSinceSmallVariance = 0;
                 hasDrawnLine = false;
-                renderer.material.color = new Color(1, 0, 0, 0.5f);
+                renderer.material.color = new Color(1, 0, 0, 0.3f);
             }
             /*// Check if eye gaze is available
             if (!CoreServices.InputSystem.EyeGazeProvider.IsEyeTrackingDataValid)

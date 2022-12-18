@@ -46,6 +46,8 @@ public class CueManager : MonoBehaviour
     public float averageWalkingSpeed = 2f;
 
     public bool targetAutomaticSelection = true;
+    private bool firstLoadFinished = true;
+    private bool hasFinishedSearch = false;
 
     private static CueManager m_instance;
     public static CueManager Instance
@@ -76,14 +78,31 @@ public class CueManager : MonoBehaviour
         sceneUnderstandingManager.mixedRehabilittion_DisplayMeshes = false;
         circleIndicator.color = Color.white;
     }
-
-    public  void ShowWelcomeMenu(bool txtFound)
+    public void FinishedTxtSearch(bool txtFound)
     {
+        hasFinishedSearch = true;
         hasFoundTxt = txtFound;
-        StartCoroutine(DelayedShowWelcomeMenu(txtFound));
+        if (firstLoadFinished)
+        {
+            StartCoroutine(DelayedShowWelcomeMenu(hasFoundTxt));
+        }
     }
+    
+    public void firstOnLoadFinished()
+    {
+        if (firstLoadFinished)
+        {
+            Debug.Log("firstOnLoadFinished");
+            DisableDisplayingSceneRoom();
+            firstLoadFinished = false;
 
+            if (hasFinishedSearch)
+            {
+                StartCoroutine(DelayedShowWelcomeMenu(hasFoundTxt));
 
+            }
+        }
+    }
 
     IEnumerator DelayedShowWelcomeMenu(bool txtFound)
     {
@@ -340,9 +359,5 @@ public class CueManager : MonoBehaviour
         CueManager.Instance.enableCues();
     }
 
-    public void firstOnLoadFinished()
-    {
-        DisableDisplayingSceneRoom();
-        sceneUnderstandingManager.OnLoadFinished.RemoveListener(firstOnLoadFinished);
-    }
+    
 }

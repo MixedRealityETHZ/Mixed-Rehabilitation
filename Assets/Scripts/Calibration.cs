@@ -70,7 +70,7 @@ public class Calibration : MonoBehaviour
             Debug.Log("Error while reading calibration file: " + e.Message);
         }
 
-        CueManager.Instance.ShowWelcomeMenu(_isCalibrated);
+        CueManager.Instance.FinishedTxtSearch(_isCalibrated);
 
         // TestFunctions();
 
