@@ -73,6 +73,7 @@ public class CueManager : MonoBehaviour
         sampleMenu.Hide();
         checkCalibrationMenu.SetActive(false);
         disableCues();
+        sceneUnderstandingManager.mixedRehabilittion_DisplayMeshes = false;
         circleIndicator.color = Color.white;
     }
 
@@ -177,6 +178,7 @@ public class CueManager : MonoBehaviour
     }
     public void StartCalibration()
     {
+        Debug.Log("Entered StartCalibration");
         if (!isCalibrating)
         {
             checkCalibrationMenu.SetActive(false);

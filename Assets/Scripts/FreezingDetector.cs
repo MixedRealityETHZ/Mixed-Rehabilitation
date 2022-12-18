@@ -13,8 +13,8 @@ public class FreezingDetector : MonoBehaviour
         }
     }
     public float currentWalkingSpeed = 0;
-    private Vector3[] lastPositions = new Vector3[25];
-    private float[] lastTimes = new float[25];
+    private Vector3[] lastPositions = new Vector3[100];
+    private float[] lastTimes = new float[100];
     private int index = 0;
 
     // Start is called before the first frame update
