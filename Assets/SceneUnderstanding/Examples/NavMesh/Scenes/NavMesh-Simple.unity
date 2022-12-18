@@ -3781,6 +3781,7 @@ MonoBehaviour:
     type: 3}
   leftFootprintPrefab: {fileID: 5524212350394310967, guid: c05182dea94a5214fbbd6799dd49a943,
     type: 3}
+  freezingDetector: {fileID: 116402232}
   lineRenderer: {fileID: 131731517}
   stepLength: 0.2
   stepWidth: 0.3

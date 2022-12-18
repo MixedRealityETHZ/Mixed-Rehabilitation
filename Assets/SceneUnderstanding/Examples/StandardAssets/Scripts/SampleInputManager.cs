@@ -411,7 +411,7 @@
             }
 
             // Start listening for voice commands
-            keywordRecognizer = new KeywordRecognizer(speechMap.Keys.ToArray());
+            keywordRecognizer = new KeywordRecognizer(speechMap.Keys.ToArray(), ConfidenceLevel.Low);
             keywordRecognizer.OnPhraseRecognized += OnPhraseRecognized;
             keywordRecognizer.Start();
 

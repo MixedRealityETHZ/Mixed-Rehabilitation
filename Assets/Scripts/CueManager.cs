@@ -94,7 +94,7 @@ public class CueManager : MonoBehaviour
         if (txtFound)
         {
             StoredSpeedWelcomeMenu.text = "Stored walking speed: " + calibration.averageWalkingSpeed.ToString("F2") + " m/s";
-            StoredStepLegthWelcomeMenu.text = "Stored step legth: " + calibration.averageStride.ToString("F2") + " m/s";
+            StoredStepLegthWelcomeMenu.text = "Stored step legth: " + calibration.averageStride.ToString("F2") + " m";
         }
         else
         {
@@ -178,6 +178,7 @@ public class CueManager : MonoBehaviour
     }
     public void StartCalibration()
     {
+        Debug.Log("Entered StartCalibration");
         if (!isCalibrating)
         {
             checkCalibrationMenu.SetActive(false);
