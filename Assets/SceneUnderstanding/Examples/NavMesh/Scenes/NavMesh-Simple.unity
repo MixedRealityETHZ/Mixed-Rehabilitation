@@ -4666,6 +4666,11 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3516745877267559299, guid: cf93ba84468503440bef5b91e74f843b,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 834900238e956f34d8a8793c1990fab2, type: 2}
     - target: {fileID: 6721373086189343856, guid: cf93ba84468503440bef5b91e74f843b,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -6736,7 +6741,7 @@ PrefabInstance:
     - target: {fileID: 1654952326856315522, guid: a9b7988b52547e14899219ced698f6b2,
         type: 3}
       propertyPath: QuerySceneFromDevice
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1654952326856315522, guid: a9b7988b52547e14899219ced698f6b2,
         type: 3}

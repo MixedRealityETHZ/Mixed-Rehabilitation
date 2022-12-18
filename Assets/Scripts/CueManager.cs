@@ -333,7 +333,7 @@ public class CueManager : MonoBehaviour
     }
     IEnumerator delayedTurnOnCues()
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(8f);
         
         CueManager.Instance.enableCues();
     }
