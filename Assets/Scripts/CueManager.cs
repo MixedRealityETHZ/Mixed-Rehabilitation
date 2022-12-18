@@ -101,9 +101,9 @@ public class CueManager : MonoBehaviour
         }
         welcomeMenu.SetActive(true);
         //Move the  menu to the correct position
-        welcomeMenu.transform.position = Camera.main.transform.position + (Camera.main.transform.forward * 0.75f);
+        //welcomeMenu.transform.position = Camera.main.transform.position + (Camera.main.transform.forward * 0.75f);
         //Visuals foward vector is reversed, do a look from Camera to visuals to fix it.
-        welcomeMenu.transform.rotation = Quaternion.LookRotation(welcomeMenu.transform.position - Camera.main.transform.position);
+        //welcomeMenu.transform.rotation = Quaternion.LookRotation(welcomeMenu.transform.position - Camera.main.transform.position);
 
 
     }
