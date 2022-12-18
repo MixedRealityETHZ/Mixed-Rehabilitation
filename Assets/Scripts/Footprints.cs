@@ -114,7 +114,7 @@ public class Footprints : MonoBehaviour
                 float angle = Mathf.Atan2(trajectory.z, trajectory.x);// * Mathf.Rad2Deg;
 
                 Debug.Log(stepWidth);
-                float currentStepWidth = stepWidth*30f - freezingDetector.currentWalkingSpeed*0.05f;
+                float currentStepWidth = stepWidth*8f - freezingDetector.currentWalkingSpeed*0.05f;
                 Debug.Log(currentStepWidth);
 
                 if (leftFoot)

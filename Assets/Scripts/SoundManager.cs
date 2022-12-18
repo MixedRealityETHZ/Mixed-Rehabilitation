@@ -48,5 +48,14 @@ public class SoundManager : MonoBehaviour
     {
         m_soundCue.Play();
     }
-    
+
+    private void OnApplicationQuit()
+    {
+        m_soundCue.Stop();
+    }
+    private void OnDestroy()
+    {
+        m_soundCue.Stop();
+    }
+
 }
