@@ -9,6 +9,68 @@ products:
 - hololens
 ---
 
+# Mixed Rehabilitation
+
+An application that uses Scene Understanding to help people with Parkinson's disease to navigate through their environment. It will display both visual and auditory cues to help them navigate through their environment.
+
+## About the project
+
+This project builds on top of Microsoft's Scene Understanding example project. [Its original README can be found below.](#microsoftmixedrealitysceneunderstandingsamples---unitysample)
+
+## Setup
+
+The original project used Unity 2020.3.12f1, which we [upgraded to 2021.3.14f1](/Assets/SceneUnderstanding/Core/Understanding/Scripts/SceneUnderstandingManager.cs#L1364-L1375). The old version may or may not work with this project, so it is recommended to use the 2021 version.
+
+### Requirements
+
+- Install Visual Studio 2022 following [these instructions](https://learn.microsoft.com/en-us/windows/mixed-reality/develop/install-the-tools). This also means installing the listed workloads, namely:
+  - .NET desktop development
+  - Desktop development with C++
+  - Universal Windows Platform (UWP) development and the following components:
+    - Windows 10 SDK (10.0.19041.0 or 10.0.18362.0) or Windows 11 SDK
+    - USB Device Connectivity (required to deploy/debug to HoloLens over USB)
+    - C++ (v142) Universal Windows Platform tools (required when using Unity)
+  - Game development with Unity
+- Install Unity 2021.3.14f1 or higher following [these instructions](https://learn.microsoft.com/en-us/windows/mixed-reality/develop/unity/choosing-unity-version). Make sure to install the following components:
+  - Universal Windows Platform Build Support
+  - Windows Build Support (IL2CPP)
+
+While other setups may work, these are the ones we used and can guarantee they work.
+
+### Basic Setup
+
+1. Clone or download this repository.
+2. Open the project in Unity.
+3. Open the `NavMesh-Simple` scene inside [`Assets/SceneUnderstanding/Examples/NavMesh/Scenes`](/Assets/SceneUnderstanding/Examples/NavMesh/Scenes).
+
+Now, follow the instructions for [running on PC](#running-on-pc) or [running on HoloLens 2](#running-on-hololens-2).
+
+### Running on PC
+
+1. In the scene, select the `SceneUnderstandingManager` game object and make sure that `Query Scene From Device` is **not** selected on the `SceneUnderstandingManager Component`.
+2. Click the play button in the top center of the Unity editor. A scene should load and you should be able to navigate around it.
+
+### Running on HoloLens 2
+
+1. In the scene, select the `SceneUnderstandingManager` game object and make sure that `Query Scene From Device` is selected on the `SceneUnderstandingManager Component`.
+2. Go to `File > Build Settings` and deselect all scenes except for `NavMesh-Simple`.
+3. Make sure the platform is set to `Universal Windows Platform` and the architecture is set to `ARM64`. Set the build configuration to `Release`, then click `Build`.
+4. Once the build completes successfully, open the `.sln` file in Visual Studio.
+5. In Visual Studio, select `Release` and `ARM64` as the build configuration and architecture, and make sure to select `Device` as the target device. Then, click the `Start` button to deploy the application to your HoloLens 2.
+
+## Code
+
+Our changes are located in the `Assets` folder with the code being in the `Assets/Scripts` folder:
+
+- [`Calibration.cs`](/Assets/Scripts/Calibration.cs): Handles the calibration process. Stores the last few positions of the user's head and continuously updates them. Offers a `CalibrateCoroutine` method that is going to be called from `CueManager` during the calibration process.
+- [`CueManager.cs`](/Assets/Scripts/CueManager.cs): Handles the cues, i.e. enables and disables them. Also handles the calibration process and in general the menus the user can interact with.
+- [`Footprints.cs`](/Assets/Scripts/Footprints.cs): Handles the footprints. Stores the list of footprints and shows and hides them. Continuously checks whether the invisible agent has moved and if so, adds new footprints.
+- [`FreezingDetector.cs`](/Assets/Scripts/FreezingDetector.cs): Handles the freezing detection. Stores the last few positions of the user's head and continuously updates them. Continuously checks whether the user's walking speed is below a certain threshold and if so, sets the `isFreezing` variable to `true`. Otherwise, it sets it to `false`.
+- [`PoseTracking.cs`](/Assets/Scripts/PoseTracking.cs): Used for understanding the data provided and how to use it for the user calibration.
+- [`SoundCuesManager.cs`](/Assets/Scripts/SoundCuesManager.cs): Plays the sound cues if cues are enabled.
+- [`TargetSelector.cs`](/Assets/Scripts/TargetSelector.cs): Handles the target selection. Shows and hides the target crosshair and continuously checks whether the user is looking at a target. If so, it calls the `NewPoint` method from `VisualCuesManager`.
+- [`VisualCuesManager.cs`](/Assets/Scripts/VisualCuesManager.cs): Handles the visual cues. Whereas `Footprints.cs` handles the footprints, this class actually moves the invisible agent to the target location using the provided NavMesh methods, and resets the footprints before doing so.
+
 # Microsoft.MixedReality.SceneUnderstanding.Samples - UnitySample
 
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
