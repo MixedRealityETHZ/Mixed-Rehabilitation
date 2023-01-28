@@ -1,14 +1,3 @@
----
-page_type: sample
-name: Scene Understanding samples for Unity
-description: A Unity-based sample application that showcases Scene Understanding on HoloLens 2.
-languages:
-- csharp
-products:
-- windows-mixed-reality
-- hololens
----
-
 # Mixed Rehabilitation
 
 An application that uses Scene Understanding to help people with Parkinson's disease to navigate through their environment. It will display both visual and auditory cues to help them navigate through their environment.
