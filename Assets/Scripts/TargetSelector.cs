@@ -70,9 +70,6 @@ public class TargetSelector : MonoBehaviour
                 meshRenderer.enabled = false;
             }
         }
-
-
-
     }
     public void VoiceCommandCalculateTarget()
     {
@@ -92,7 +89,6 @@ public class TargetSelector : MonoBehaviour
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.TransformDirection(Vector3.forward), out raycastHit, Mathf.Infinity))
         {
             hitPosition = raycastHit.point;
-
 
             // Update the current position
             positions[index++] = hitPosition;
@@ -119,7 +115,6 @@ public class TargetSelector : MonoBehaviour
     }
     void UpdateTargetCalculation()
     {
-
         Vector3 hitPosition = Vector3.zero;
         RaycastHit raycastHit;
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.TransformDirection(Vector3.forward), out raycastHit, Mathf.Infinity))
@@ -169,10 +164,6 @@ public class TargetSelector : MonoBehaviour
             // Therefore, the plane needs to be rotated 90 degrees around the x-axis
             plane.transform.rotation = Quaternion.LookRotation(3 * gazeDirection, Vector3.up) * Quaternion.Euler(-90, 0, 0);
 
-
-
-
-
             // Update the color
             if (variance < maxVarianceToConfirm)
             {
@@ -197,31 +188,6 @@ public class TargetSelector : MonoBehaviour
                 hasDrawnLine = false;
                 renderer.material.color = new Color(1, 0, 0, 0.3f);
             }
-            /*// Check if eye gaze is available
-            if (!CoreServices.InputSystem.EyeGazeProvider.IsEyeTrackingDataValid)
-                sphere.GetComponent<Renderer>().material.color = Color.gray;
-            */
-            // if enabled, set color to red
-            /*
-            if (CoreServices.InputSystem.EyeGazeProvider.IsEyeTrackingEnabled)
-                sphere.GetComponent<Renderer>().material.color = Color.red;
-            else
-                sphere.GetComponent<Renderer>().material.color = Color.blue;
-
-            if (CoreServices.InputSystem.EyeGazeProvider.IsEyeCalibrationValid != null)
-            {
-                if (CoreServices.InputSystem.EyeGazeProvider.IsEyeCalibrationValid.Value)
-                    sphere.GetComponent<Renderer>().material.color = Color.green;
-                else
-                    sphere.GetComponent<Renderer>().material.color = Color.yellow;
-            }*/
-
-            /*RaycastHit hit;
-            if (Physics.Raycast(transform.position, transform.forward, out hit, 100))
-            {
-                sphere.transform.position = hit.point + Vector3.left;
-                Debug.Log("Hit " + hit.transform.name);
-            }*/
         }
     }
 

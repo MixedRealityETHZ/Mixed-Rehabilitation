@@ -76,34 +76,6 @@ public class Calibration : MonoBehaviour
 
     }
 
-    void TestFunctions()
-    {
-        // Read the test data from the file in the downloads folder
-        string dataPath = "C:/Users/phili/Downloads/MySaveData12_12_2022 10_30_30.txt";
-        string[] lines = System.IO.File.ReadAllLines(dataPath);
-        for (int i = 1; i < lines.Length; i++)
-        {
-            string[] line = lines[i].Split(';');
-            float x = float.Parse(line[0].Replace(',', '.'));
-            float y = float.Parse(line[1].Replace(',', '.'));
-            float z = float.Parse(line[2].Replace(',', '.'));
-            Vector3 headPosition = new Vector3(x, y, z);
-
-            // Save the head position
-            lastHeadPositions[lastHeadPositionIndex] = headPosition;
-            lastHeadPositionIndex++;
-
-            // If the last head position index is equal to the length of the array, we want to reset it to 0
-            if (lastHeadPositionIndex == lastHeadPositions.Length)
-            {
-                lastHeadPositionIndex = 0;
-            }
-        }
-        
-        // Print
-        Calibrate();
-    }
-
     void UpdateMovingAverage()  
     {
         for (int i = 0; i < movingAverageHeadPositions.Length; i++)
